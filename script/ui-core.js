@@ -30,6 +30,11 @@ document.querySelectorAll('.fi').forEach(function(el,i){el.style.transitionDelay
 // Custom cursor tracking
 var cur=document.getElementById('cursor');
 window.addEventListener('mousemove',function(e){cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';},{passive:true});
+
+// Dynamic Year
+var cy = document.getElementById('current-year');
+if (cy) cy.textContent = new Date().getFullYear();
+
 document.querySelectorAll('a,button,.s-card,.p-card,.theme-pill').forEach(function(el){
   el.addEventListener('mouseenter',function(){cur.style.transform='translate(-50%,-50%) scale(2.8)';cur.style.opacity='.55';});
   el.addEventListener('mouseleave',function(){cur.style.transform='translate(-50%,-50%) scale(1)';cur.style.opacity='1';});
@@ -50,13 +55,14 @@ document.querySelectorAll('a,button,.s-card,.p-card,.theme-pill').forEach(functi
 
   if (!browser) return;
 
-  var currentURL = '';
-  var navHistory = [];
-  var histIdx    = -1;
-  var isMax      = false;
-  var isMin      = false;
-  var prevRect   = null;
-  var dragState  = null;
+  var currentURL   = '';
+  var navHistory   = [];
+  var histIdx      = -1;
+  var isMax        = false;
+  var isMin        = false;
+  var prevRect     = null;
+  var dragState    = null;
+  var blockedOpened = false; // guard to prevent opening lots of tabs when iframe is blocked
 
   window.openPopBrowser = function (url) {
     currentURL = url;
@@ -119,6 +125,14 @@ document.querySelectorAll('a,button,.s-card,.p-card,.theme-pill').forEach(functi
     blocked.classList.add('show');
     blockedOpen.href = url;
     finishLoad();
+
+    // Only open one external tab per blocked navigation (prevents spam-open loops)
+    if (!blockedOpened) {
+      blockedOpened = true;
+      window.open(url, '_blank');
+      browser.classList.remove('open');
+      iframe.src = 'about:blank';
+    }
   }
 
   function navigate(url, addToHistory) {
@@ -135,6 +149,7 @@ document.querySelectorAll('a,button,.s-card,.p-card,.theme-pill').forEach(functi
     });
 
     iframe.src = url;
+    blockedOpened = false;
 
     if (addToHistory) {
       navHistory = navHistory.slice(0, histIdx + 1);
