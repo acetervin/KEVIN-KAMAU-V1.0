@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kevin Kamau — Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+</head>
+<body class="t-primary">
+
+<div id="grid-bg"></div>
+<div id="progress"></div>
+<div id="cursor"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div>
+    <div class="term-window">
+      <div class="term-bar">
+        <div class="term-btns"><span class="tb tb-r"></span><span class="tb tb-y"></span><span class="tb tb-g"></span></div>
+        <span class="term-title">kevin_kamau.sh</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line" id="tl0"></div>
+        <div class="term-line" id="tl1"></div>
+        <div class="term-line" id="tl2"></div>
+        <div class="term-line" id="tl3"></div>
+        <div class="term-line" id="tl4"></div>
+        <div class="term-line" id="tl5"></div>
+        <div class="term-line" id="tl6"></div>
+        <div class="term-line" id="tl7"></div>
+        <div class="term-line" id="tl8"></div>
+        <div class="term-line" id="tl9"></div>
+        <div class="tl-cursor" id="tlcur"></div>
+        <!-- Network gauge widget -->
+        <div id="net-gauge" style="display:none;margin-top:.8rem;padding:.8rem;background:rgba(212,168,75,.06);border:1px solid rgba(212,168,75,.2);border-radius:6px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;">
+            <span style="font-size:.65rem;color:#d4a84b;letter-spacing:.15em;">DOWNLOAD</span>
+            <span id="ng-mbps" style="font-size:1.1rem;font-weight:700;color:#d4a84b;">-- Mbps</span>
+            <span id="ng-quality" style="font-size:.62rem;letter-spacing:.1em;">--</span>
+          </div>
+          <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;">
+            <div id="ng-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#d4a84b,#e8c87a);border-radius:3px;transition:width .5s ease;box-shadow:0 0 8px rgba(212,168,75,.5);"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:.5rem;">
+            <span style="font-size:.58rem;color:rgba(255,255,255,.25);">0</span>
+            <span style="font-size:.58rem;color:rgba(255,255,255,.25);">25 Mbps</span>
+            <span style="font-size:.58rem;color:rgba(255,255,255,.25);">100+</span>
+          </div>
+          <div style="margin-top:.6rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;text-align:center;">
+            <div><div id="ng-ping" style="font-size:.9rem;font-weight:700;color:#64b5f6;">--</div><div style="font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">PING ms</div></div>
+            <div><div id="ng-load" style="font-size:.9rem;font-weight:700;color:#28c840;">--</div><div style="font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">EST LOAD</div></div>
+            <div><div id="ng-size" style="font-size:.9rem;font-weight:700;color:#d4a84b;">760KB</div><div style="font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">PAGE SIZE</div></div>
+          </div>
+          <div style="margin-top:.5rem;text-align:center;">
+            <span id="ng-type" style="font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.25);letter-spacing:.12em;">DETECTING...</span>
+          </div>
+        </div>
+      </div>
+      <div class="term-pw"><div class="term-pb" id="tpbar"></div></div>
+    </div>
+    <div class="skip-hint">click anywhere to skip</div>
+  </div>
+</div>
+
+<!-- MINIGAME -->
+<div id="minigame">
+  <div id="mg-inner">
+    <button class="mg-close" onclick="closeGame()">✕</button>
+    <div id="mg-content"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">KK.DEV</a>
+  <ul class="nav-links">
+    <li><a href="#about"    data-k="nav_about">About</a></li>
+    <li><a href="#skills"   data-k="nav_skills">Skills</a></li>
+    <li><a href="#projects" data-k="nav_projects">Projects</a></li>
+    <li><a href="#contact"  data-k="nav_contact">Contact</a></li>
+  </ul>
+  <div class="controls">
+    <div class="lang-sw">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button id="btn-ar" onclick="setLang('ar')">عر</button>
+    </div>
+    <div class="theme-pill" onclick="toggleTheme()">
+      <span data-k="theme_lbl">Theme</span>
+      <div class="theme-dot"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <p class="hero-eyebrow fi" data-k="eyebrow">Software Engineer · Kenya 🇰🇪</p>
+  <h1 class="hero-name fi">
+    <span data-k="name1">KEVIN</span><br>
+    <span class="outline" data-k="name2">KAMAU</span><br>
+    <span class="hi" data-k="name3">BUILDS.</span>
+  </h1>
+  <p class="hero-desc fi" data-k="desc">Building smart, secure, and seamless digital solutions. CS student at Kirinyaga University — exploring automations, full-stack systems, and everything in between.</p>
+  <div class="hero-cta fi">
+    <a href="https://github.com/acetervin" target="_blank" class="btn-pri" data-k="cta1">GitHub Profile →</a>
+    <a href="#contact" class="btn-sec" data-k="cta2">Get in Touch</a>
+  </div>
+  <!-- 3D Canvas -->
+  <div id="hero3d-wrap">
+    <canvas id="geo-canvas"></canvas>
+    <div id="face-label"></div>
+  </div>
+  <div class="hero-badge"><span data-k="badge">Open to opportunities · 2025</span></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="fi">
+    <p class="sec-label" data-k="about_lbl">About Me</p>
+    <h2 class="sec-title" data-k="about_title">Building smart systems<br>from Nairobi</h2>
+    <p class="about-p" data-k="about1">Software Engineering student at Kirinyaga University, building smart, secure, and seamless digital solutions. Passionate about automations, full-stack web development, and AI-integrated systems.</p>
+    <p class="about-p" data-k="about2">Currently focused on mastering Cloud, DevOps, and Data Structures while shipping real-world projects. Mission: a full online food ordering and management system.</p>
+    <div class="stats">
+      <div><div class="stat-num">12</div><div class="stat-lbl" data-k="s_proj">Repos</div></div>
+      <div><div class="stat-num">6+</div><div class="stat-lbl" data-k="s_stack">Languages</div></div>
+      <div><div class="stat-num">∞</div><div class="stat-lbl" data-k="s_drive">Drive</div></div>
+    </div>
+  </div>
+  <div class="fi">
+    <div class="about-card">
+      <span class="card-tag">// current_status</span>
+      <div class="card-row">
+        <div><span class="k">name</span>     → Kevin Kamau</div>
+        <div><span class="k">handle</span>   → @acetervin</div>
+        <div><span class="k">uni</span>      → Kirinyaga University</div>
+        <div><span class="k">location</span> → Nairobi, Kenya 🇰🇪</div>
+        <div><span class="k">stack</span>    → HTML · JS · Tailwind · Node</div>
+        <div><span class="k">status</span>   → <span class="available">● Open to Work</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="skills-wrap" id="skills">
+  <div class="skills-inner">
+    <p class="sec-label fi" data-k="sk_lbl">Technical Skills</p>
+    <h2 class="sec-title fi" data-k="sk_title">My Toolkit</h2>
+    <div class="skill-grid">
+      <div class="s-card fi"><span class="s-icon">🌐</span><div class="s-name">HTML5/CSS3</div><div class="s-lvl" data-k="expert">Expert</div><div class="s-bar"><div class="s-fill" style="width:92%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">⚡</span><div class="s-name">JavaScript</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:85%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">🐍</span><div class="s-name">Python</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:82%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">☕</span><div class="s-name">Java</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:70%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">🎨</span><div class="s-name">Tailwind CSS</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:88%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">⚛️</span><div class="s-name">React</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:60%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">🟢</span><div class="s-name">Node.js</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:58%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">🐘</span><div class="s-name">PostgreSQL</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:72%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">🔥</span><div class="s-name">Firebase</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:74%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">🐱</span><div class="s-name">Git / GitHub</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:85%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">☁️</span><div class="s-name">Cloud / AWS</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:40%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon">🎨</span><div class="s-name">Figma</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:70%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="proj-wrap" id="projects">
+  <p class="sec-label fi" data-k="pj_lbl">Selected Work</p>
+  <h2 class="sec-title fi" data-k="pj_title">Projects</h2>
+  <div class="proj-grid">
+    <div class="p-card fi">
+      <div class="p-thumb"><span class="p-num">01</span><div class="p-thumb-inner">🍽️</div></div>
+      <div class="p-body">
+        <div class="p-tags"><span class="p-tag">HTML</span><span class="p-tag">CSS</span><span class="p-tag">JS</span></div>
+        <h3 class="p-title" data-k="p1t">Allen's Kitchen</h3>
+        <p class="p-desc" data-k="p1d">A smart restaurant ordering platform — the flagship project. Full online food ordering and management system with a clean dashboard UI.</p>
+        <a href="https://github.com/acetervin/Allen-s_Kitchen" target="_blank" class="p-link" data-k="view_cs">View on GitHub →</a>
+      </div>
+    </div>
+    <div class="p-card fi">
+      <div class="p-thumb"><span class="p-num">02</span><div class="p-thumb-inner">📊</div></div>
+      <div class="p-body">
+        <div class="p-tags"><span class="p-tag">TypeScript</span><span class="p-tag">React</span></div>
+        <h3 class="p-title" data-k="p2t">Admin Dashboard</h3>
+        <p class="p-desc" data-k="p2d">A fully-featured admin dashboard built with TypeScript, featuring data tables, analytics views, and a clean management interface.</p>
+        <a href="https://github.com/acetervin/Admin-dashboard" target="_blank" class="p-link" data-k="view_cs">View on GitHub →</a>
+      </div>
+    </div>
+    <div class="p-card fi">
+      <div class="p-thumb"><span class="p-num">03</span><div class="p-thumb-inner">🤖</div></div>
+      <div class="p-body">
+        <div class="p-tags"><span class="p-tag">Python</span><span class="p-tag">AI</span><span class="p-tag">Automation</span></div>
+        <h3 class="p-title" data-k="p3t">Smart Automation</h3>
+        <p class="p-desc" data-k="p3d">Exploring AI-powered automations and intelligent systems — from data structures to cloud-native solutions.</p>
+        <a href="https://github.com/acetervin" target="_blank" class="p-link" data-k="view_cs">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="contact-wrap" id="contact">
+  <div class="contact-bg-text" data-k="ct_bg">CONTACT</div>
+  <div class="contact-inner">
+    <p class="sec-label fi" style="justify-content:center;" data-k="ct_lbl">Contact</p>
+    <h2 class="contact-big fi" data-k="ct_title">Let's build<br>something great.</h2>
+    <p class="contact-sub fi" data-k="ct_sub">Open to collaborations, open source contributions, and interesting builds. Based in Nairobi — let's connect.</p>
+    <div class="c-links fi">
+      <a href="/cdn-cgi/l/email-protection#5a313b373b2f313f2c3334626d6b1a3d373b333674393537" class="c-link">✉ Email</a>
+      <a href="https://github.com/acetervin" target="_blank" class="c-link">⌥ GitHub</a>
+      <a href="https://www.linkedin.com/in/devkevin75/" target="_blank" class="c-link">▲ LinkedIn</a>
+      <a href="https://x.com/Realcrptonite" target="_blank" class="c-link">𝕏 Twitter</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="f-copy" data-k="f_copy">© 2025 Kevin Kamau — All rights reserved</span>
+  <div style="display:flex;align-items:center;gap:.5rem;">
+    <span class="f-copy" data-k="f_built">Built with precision</span>
+    <span class="f-dot"></span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="script/translations.js"></script>
+<script src="script/ui-core.js"></script>
+<script src="script/loader.js"></script>
+<script src="script/three-setup.js"></script>
+<script src="script/games.js"></script>
+</body>
+</html>
