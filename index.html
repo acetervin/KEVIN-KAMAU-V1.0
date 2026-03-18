@@ -115,6 +115,51 @@
   <div class="hero-badge"><span data-k="badge">Open to opportunities · 2025</span></div>
 </section>
 
+<!-- POP BROWSER -->
+<div id="pop-browser">
+  <!-- Resize handles (8 directions) -->
+  <div class="pb-resize top"    data-dir="top"></div>
+  <div class="pb-resize right"  data-dir="right"></div>
+  <div class="pb-resize bottom" data-dir="bottom"></div>
+  <div class="pb-resize left"   data-dir="left"></div>
+  <div class="pb-resize tr"     data-dir="tr"></div>
+  <div class="pb-resize tl"     data-dir="tl"></div>
+  <div class="pb-resize br"     data-dir="br"></div>
+  <div class="pb-resize bl"     data-dir="bl"></div>
+
+  <!-- Title bar -->
+  <div id="pb-titlebar">
+    <button class="pb-btn" id="pb-close"    title="Close"></button>
+    <button class="pb-btn" id="pb-minimise" title="Minimise"></button>
+    <button class="pb-btn" id="pb-maximise" title="Maximise"></button>
+    <div id="pb-urlbar">
+      <button id="pb-back"    title="Back">&#9664;</button>
+      <button id="pb-fwd"     title="Forward">&#9654;</button>
+      <button id="pb-refresh" title="Refresh">&#8635;</button>
+      <div id="pb-url-display"><span id="pb-url-text">about:blank</span></div>
+      <a id="pb-open-ext" href="#" target="_blank">&#8599; Open</a>
+    </div>
+  </div>
+
+  <!-- Loading bar -->
+  <div id="pb-loadbar-wrap"><div id="pb-loadbar"></div></div>
+
+  <!-- iframe content + blocked overlay -->
+  <div id="pb-content">
+    <iframe id="pb-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+
+    <div id="pb-blocked">
+      <div id="pb-blocked-icon">&#128683;</div>
+      <div id="pb-blocked-title">X-Frame-Options Blocked</div>
+      <div id="pb-blocked-msg">
+        This site prevents embedding in iframes (common for GitHub, LinkedIn, Twitter).
+        Open it directly in a new tab instead.
+      </div>
+      <a id="pb-blocked-open" href="#" target="_blank">Open in New Tab &#8599;</a>
+    </div>
+  </div>
+</div>
+
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="fi">
