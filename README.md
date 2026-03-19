@@ -1,6 +1,6 @@
 # Kevin Kamau — Software Engineer Portfolio
 
-A modern, interactive portfolio website for Kevin Kamau, a Software Engineering student at Kirinyaga University. This project features a unique terminal-style loader, 3D interactive elements, and a multi-language (English/Arabic) interface.
+A modern, interactive portfolio website for Kevin Kamau, a Software Engineering student. This project features a unique terminal-style loader, 3D interactive elements, and a multi-language (English/Arabic) interface.
 
 ## Features
 

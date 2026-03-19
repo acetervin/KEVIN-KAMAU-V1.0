@@ -30,7 +30,7 @@ function initThree(){
   var pt=new THREE.PointLight(0xe8c87a,1.2,12);pt.position.set(0,2,2);scene.add(pt);
 
   // Face labels
-  var FACES=['HTML5','CSS3','JavaScript','Python','Java','React','Node.js','PostgreSQL','Firebase','Git','Tailwind','Figma','Cloud','DevOps','TypeScript','PHP','C++','MySQL','Linux','VSCode'];
+  var FACES=['HTML5','CSS3','JavaScript','Python','React','Node.js','PostgreSQL','Firebase','Git','Tailwind','Figma','Cloud','DevOps','TypeScript','PHP','C++','MySQL','Linux','VSCode'];
 
   // Icosahedron with per-face colors
   var baseGeo=new THREE.IcosahedronGeometry(1.55,0);

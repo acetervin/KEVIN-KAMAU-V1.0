@@ -4,7 +4,17 @@ var lang='en', theme='primary';
 function setLang(l){
   lang=l;
   var t=T[l];
-  document.querySelectorAll('[data-k]').forEach(function(el){var v=t[el.dataset.k];if(v!==undefined)el.textContent=v;});
+  document.querySelectorAll('[data-k]').forEach(function(el){
+    var v=t[el.dataset.k];
+    if (v !== undefined) {
+      // Some translation values include HTML (icons), so use innerHTML when needed
+      if (typeof v === 'string' && v.indexOf('<') !== -1) {
+        el.innerHTML = v;
+      } else {
+        el.textContent = v;
+      }
+    }
+  });
   if(l==='ar'){document.body.classList.add('lang-ar');document.documentElement.setAttribute('lang','ar');document.documentElement.setAttribute('dir','rtl');}
   else{document.body.classList.remove('lang-ar');document.documentElement.setAttribute('lang','en');document.documentElement.setAttribute('dir','ltr');}
   document.getElementById('btn-en').classList.toggle('active',l==='en');
@@ -320,4 +330,76 @@ document.querySelectorAll('a,button,.s-card,.p-card,.theme-pill').forEach(functi
     }
   });
 
+})();
+
+/* ── EXPERIENCE (LinkedIn fetch + local fallback) ───────────────────────── */
+(function(){
+  'use strict';
+
+  var expStatus = document.getElementById('exp-status');
+  var expList   = document.getElementById('exp-list');
+
+  function t(key){
+    return (T[lang] && T[lang][key]) || key;
+  }
+
+  function setStatus(key){
+    if(!expStatus) return;
+    expStatus.textContent = t(key);
+  }
+
+  function renderExperience(items){
+    if(!expList) return;
+    expList.innerHTML = '';
+    (items || []).forEach(function(item){
+      var card = document.createElement('div');
+      card.className = 'exp-card fi';
+      card.innerHTML =
+        '<div class="exp-top">' +
+          '<div class="exp-company">' + (item.company || '') + '</div>' +
+          '<div class="exp-title">' + (item.role || '') + '</div>' +
+          '<div class="exp-dates">' + (item.dates || '') + '</div>' +
+        '</div>' +
+        '<div class="exp-bullets"><ul>' +
+          ((item.bullets || []).map(function(b){ return '<li>' + b + '</li>'; }).join('')) +
+        '</ul></div>';
+      expList.appendChild(card);
+    });
+  }
+
+  function loadLocalData(){
+    return fetch('data/experience.json', {cache:'no-cache'})
+      .then(function(r){ if(!r.ok) throw new Error('no local data'); return r.json(); });
+  }
+
+  function loadLinkedIn(){
+    var url = 'https://www.linkedin.com/in/devkevin75/';
+    return fetch(url, {mode:'cors'}).then(function(resp){
+      if (!resp.ok) throw new Error('linkedIn fail');
+      return resp.text();
+    });
+  }
+
+  function loadExperience(){
+    if(!expStatus || !expList) return;
+    setStatus('exp_loading');
+
+    loadLinkedIn().then(function(){
+      // Most browsers will block LinkedIn in an iframe and CORS will reject the fetch.
+      // If it does succeed, we still fall back to local data because parsing LinkedIn HTML is brittle.
+      return loadLocalData();
+    }).catch(function(){
+      setStatus('exp_failed');
+      return loadLocalData();
+    }).then(function(data){
+      if (data && data.length) {
+        renderExperience(data);
+        setStatus('exp_fallback');
+      }
+    }).catch(function(){
+      // keep error status
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', loadExperience);
 })();

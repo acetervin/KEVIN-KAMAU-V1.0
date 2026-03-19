@@ -93,7 +93,7 @@
 
   t(function(){ line('tl1', '<span class="tl-dim">Initialising dev environment...</span>'); pb(12); }, 700);
 
-  t(function(){ line('tl2', '<span class="tl-info">&#9654; Loading profile</span><span class="tl-dim"> [kevin_kamau@kirinyaga &middot; nairobi, KE]</span>'); pb(22); }, 1500);
+  t(function(){ line('tl2', '<span class="tl-info">&#9654; Loading profile</span><span class="tl-dim"> [kevin_kamau@nairobi &middot; KE]</span>'); pb(22); }, 1500);
 
   t(function(){ line('tl3', '<span class="tl-ok">&#10003; Credentials verified</span><span class="tl-dim"> &mdash; @acetervin &middot; 12 repos</span>'); pb(33); }, 2300);
 
