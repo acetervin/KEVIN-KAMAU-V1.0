@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-k="pd_title">Project Details — Kevin Kamau</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="t-primary">
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">KK.DEV</a>
+  <a href="index.html#projects" class="nav-back" data-k="pd_nav_back">Back to Projects</a>
+  <div class="controls">
+    <div class="lang-sw">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button id="btn-ar" onclick="setLang('ar')">عر</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PROJECT TABS -->
+<div class="pd-selector">
+  <button class="pd-tab active" onclick="switchProject(0)" data-k="pd_tab_0">01 — Allen's Kitchen</button>
+  <button class="pd-tab" onclick="switchProject(1)" data-k="pd_tab_1">02 — Admin Dashboard</button>
+  <button class="pd-tab" onclick="switchProject(2)" data-k="pd_tab_2">03 — Smart Automation</button>
+</div>
+
+<!-- PANEL: ALLEN'S KITCHEN -->
+<div class="pd-panel active" id="panel-0">
+  <div class="pd-hero">
+    <div class="pd-bg-num">01</div>
+    <p class="pd-eyebrow fi" data-k="pd_eyebrow_0">Flagship Project</p>
+    <h1 class="pd-title fi">
+      Allen's<br><span class="outline">Kitchen</span>
+    </h1>
+    <div class="pd-meta fi">
+      <span class="pd-meta-item"><span class="pd-meta-dot"></span><span data-k="pd_meta_0_0">Restaurant Platform</span></span>
+      <span class="pd-meta-item"><span class="pd-meta-dot"></span><span data-k="pd_meta_0_1">Full Stack</span></span>
+      <span class="pd-meta-item"><span class="pd-meta-dot"></span><span data-k="pd_meta_0_2">2024</span></span>
+    </div>
+    <div class="pd-cta-row fi">
+      <a href="https://github.com/acetervin/Allen-s_Kitchen" class="btn-pri" target="_blank" data-k="pd_cta_view">View on GitHub ↗</a>
+      <a href="#overview-0" class="btn-sec" data-k="pd_cta_read">Read Case Study ↓</a>
+    </div>
+    <div class="pd-tags-row fi">
+      <span class="pd-tag" data-k="pd_tags_html">HTML5</span>
+      <span class="pd-tag" data-k="pd_tags_css">CSS3</span>
+      <span class="pd-tag" data-k="pd_tags_js">JavaScript</span>
+      <span class="pd-tag" data-k="pd_tags_php">PHP</span>
+      <span class="pd-tag" data-k="pd_tags_mysql">MySQL</span>
+      <span class="pd-tag" data-k="pd_tags_tailwind">Tailwind</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="pd-body" id="overview-0">
+
+    <div>
+      <p class="pd-section-title fi" data-k="pd_section_overview">Overview</p>
+      <div class="pd-overview fi">
+        <p>Allen's Kitchen is a full-featured online food ordering and restaurant management platform — the flagship project of my portfolio. Built from scratch, it handles everything from customer browsing and ordering to kitchen management and admin reporting.</p>
+        <p>The system targets small to medium restaurants that need a robust, affordable digital presence without relying on third-party delivery platforms that take large commissions.</p>
+      </div>
+
+      <p class="pd-section-title fi" data-k="pd_section_screenshots">Screenshots</p>
+      <div class="pd-gallery fi">
+        <div class="pd-gallery-item wide" onclick="openLightbox('Customer Menu & Ordering Interface')">
+          <div class="pd-gallery-placeholder">
+            <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+            <div>Customer Menu View</div>
+          </div>
+          <span class="pd-gallery-label">menu.html</span>
+        </div>
+        <div class="pd-gallery-item" onclick="openLightbox('Admin Dashboard — Orders')">
+          <div class="pd-gallery-placeholder">
+            <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+            <div>Admin Dashboard</div>
+          </div>
+          <span class="pd-gallery-label">admin/orders.html</span>
+        </div>
+        <div class="pd-gallery-item" onclick="openLightbox('Kitchen Display System')">
+          <div class="pd-gallery-placeholder">
+            <i class="fa-solid fa-person-cooking" aria-hidden="true"></i>
+            <div>Kitchen Display</div>
+          </div>
+          <span class="pd-gallery-label">kitchen.html</span>
+        </div>
+      </div>
+
+      <p class="pd-section-title fi" data-k="pd_section_features">Core Features</p>
+      <ul class="pd-features fi">
+        <li>Customer-facing menu with real-time item availability, categories, and search</li>
+        <li>Full ordering flow — cart, checkout, order tracking with live status updates</li>
+        <li>Admin panel for menu management, order processing, and revenue reporting</li>
+        <li>Kitchen display system showing incoming orders in priority order</li>
+        <li>User authentication with role-based access (customer, staff, admin)</li>
+        <li>Mobile-responsive design built with Tailwind CSS utility classes</li>
+        <li>MySQL database with relational schema for orders, items, users, and inventory</li>
+      </ul>
+
+      <div class="pd-callout fi">
+        <div class="pd-callout-label" data-k="pd_section_challenge">// challenge</div>
+        <p>The trickiest part was syncing order status in real time between the customer view and kitchen display without WebSockets — solved using lightweight polling with PHP endpoints and optimistic UI updates on the frontend.</p>
+      </div>
+
+      <div class="pd-callout fi">
+        <div class="pd-callout-label" data-k="pd_section_learning">// what i learned</div>
+        <p>This project pushed me deep into database normalisation, session management, and building a full authentication flow from scratch. It also taught me how to structure a multi-role application where the same backend serves completely different UI needs.</p>
+      </div>
+    </div>
+
+    <div class="pd-sidebar fi">
+      <div class="pd-info-card">
+        <span class="pd-info-label" data-k="pd_info_stack">// tech_stack</span>
+        <div class="pd-info-row">
+          <span class="pd-info-key" data-k="pd_info_status">Status</span>
+          <span class="pd-status done"><span class="pd-status-dot"></span><span data-k="pd_status_live">Live</span></span>
+        </div>
+        <div class="pd-info-row">
+          <span class="pd-info-key" data-k="pd_info_type">Type</span>
+          <span class="pd-info-val">Full Stack Web App</span>
+        </div>
+        <div class="pd-info-row">
+          <span class="pd-info-key" data-k="pd_info_year">Year</span>
+          <span class="pd-info-val accent">2024</span>
+        </div>
+        <div class="pd-info-row">
+          <span class="pd-info-key" data-k="pd_info_role">Role</span>
+          <span class="pd-info-val">Solo Developer</span>
+        </div>
+        <div class="pd-info-row">
+          <span class="pd-info-key" data-k="pd_info_repo">Repo</span>
+          <span class="pd-info-val accent">Public ↗</span>
+        </div>
+      </div>
+
+      <div class="pd-info-card">
+        <span class="pd-info-label" data-k="pd_info_stack">// tech_stack</span>
+        <div class="pd-stack">
+          <div class="pd-stack-item"><i class="fa-brands fa-html5 pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">HTML5 / CSS3</span><span class="pd-stack-role">Structure</span></div>
+          <div class="pd-stack-item"><i class="fa-brands fa-js pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">JavaScript</span><span class="pd-stack-role">Interactivity</span></div>
+          <div class="pd-stack-item"><i class="fa-brands fa-tailwind pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">Tailwind CSS</span><span class="pd-stack-role">Styling</span></div>
+          <div class="pd-stack-item"><i class="fa-brands fa-php pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">PHP</span><span class="pd-stack-role">Backend</span></div>
+          <div class="pd-stack-item"><i class="fa-solid fa-database pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">MySQL</span><span class="pd-stack-role">Database</span></div>
+        </div>
+      </div>
+
+      <div class="pd-related">
+        <div class="pd-related-title" data-k="pd_section_other">Other Projects</div>
+        <a href="#" class="pd-related-card" onclick="switchProject(1);return false;">
+          <div class="pd-related-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+          <div>
+            <div class="pd-related-name">Admin Dashboard</div>
+            <div class="pd-related-tech">TypeScript · React</div>
+          </div>
+        </a>
+        <a href="#" class="pd-related-card" onclick="switchProject(2);return false;">
+          <div class="pd-related-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></div>
+          <div>
+            <div class="pd-related-name">Smart Automation</div>
+            <div class="pd-related-tech">Python · AI</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PANEL: ADMIN DASHBOARD -->
+<div class="pd-panel" id="panel-1">
+  <div class="pd-hero">
+    <div class="pd-bg-num">02</div>
+    <p class="pd-eyebrow fi" data-k="pd_eyebrow_1">TypeScript Project</p>
+    <h1 class="pd-title fi">
+      Admin<br><span class="outline">Dashboard</span>
+    </h1>
+    <div class="pd-meta fi">
+      <span class="pd-meta-item"><span class="pd-meta-dot"></span><span data-k="pd_meta_1_0">Management UI</span></span>
+      <span class="pd-meta-item"><span class="pd-meta-dot"></span><span data-k="pd_meta_1_1">Frontend</span></span>
+      <span class="pd-meta-item"><span class="pd-meta-dot"></span><span data-k="pd_meta_1_2">2024</span></span>
+    </div>
+    <div class="pd-cta-row fi">
+      <a href="https://github.com/acetervin/Admin-dashboard" class="btn-pri" target="_blank" data-k="pd_cta_view">View on GitHub ↗</a>
+      <a href="#overview-1" class="btn-sec" data-k="pd_cta_read">Read Case Study ↓</a>
+    </div>
+    <div class="pd-tags-row fi">
+      <span class="pd-tag">TypeScript</span>
+      <span class="pd-tag">React</span>
+      <span class="pd-tag">Tailwind</span>
+      <span class="pd-tag">Charts</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="pd-body" id="overview-1">
+    <div>
+      <p class="pd-section-title fi" data-k="pd_section_overview">Overview</p>
+      <div class="pd-overview fi">
+        <p>A fully-featured admin dashboard built with TypeScript — my first major project using static typing in a real application. The dashboard provides a clean management interface with data tables, analytics views, and user management.</p>
+        <p>The focus was on writing maintainable, type-safe code and building reusable component patterns that could be dropped into any backend system.</p>
+      </div>
+
+      <p class="pd-section-title fi" data-k="pd_section_screenshots">Screenshots</p>
+      <div class="pd-gallery fi">
+        <div class="pd-gallery-item wide" onclick="openLightbox('Dashboard — Analytics Overview')">
+          <div class="pd-gallery-placeholder"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i><div>Analytics View</div></div>
+          <span class="pd-gallery-label">dashboard/index.tsx</span>
+        </div>
+        <div class="pd-gallery-item" onclick="openLightbox('Users Table View')">
+          <div class="pd-gallery-placeholder"><i class="fa-solid fa-users" aria-hidden="true"></i><div>Users Table</div></div>
+          <span class="pd-gallery-label">pages/users.tsx</span>
+        </div>
+        <div class="pd-gallery-item" onclick="openLightbox('Settings Panel')">
+          <div class="pd-gallery-placeholder"><i class="fa-solid fa-gear" aria-hidden="true"></i><div>Settings</div></div>
+          <span class="pd-gallery-label">pages/settings.tsx</span>
+        </div>
+      </div>
+
+      <p class="pd-section-title fi" data-k="pd_section_features">Core Features</p>
+      <ul class="pd-features fi">
+        <li>Sortable and filterable data tables with pagination</li>
+        <li>Analytics charts showing key metrics with visual breakdowns</li>
+        <li>User management interface with role assignment</li>
+        <li>Responsive sidebar navigation with collapsible sections</li>
+        <li>Dark/light mode toggle with persistent preference</li>
+        <li>Fully typed props and API response interfaces with TypeScript</li>
+      </ul>
+
+      <div class="pd-callout fi">
+        <div class="pd-callout-label" data-k="pd_section_challenge">// challenge</div>
+        <p>Learning TypeScript's type system while building a real project simultaneously was a steep curve. Generic types for reusable table components and correctly typing API responses took multiple iterations to get right.</p>
+      </div>
+
+      <div class="pd-callout fi">
+        <div class="pd-callout-label" data-k="pd_section_learning">// what i learned</div>
+        <p>TypeScript forced me to think about data shapes before writing logic — a discipline that made the codebase significantly easier to debug. I also got solid practice in component architecture and prop drilling vs context patterns in React.</p>
+      </div>
+    </div>
+
+    <div class="pd-sidebar fi">
+      <div class="pd-info-card">
+        <span class="pd-info-label" data-k="pd_info_stack">// tech_stack</span>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_status">Status</span><span class="pd-status done"><span class="pd-status-dot"></span><span data-k="pd_status_complete">Complete</span></span></div>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_type">Type</span><span class="pd-info-val">Frontend App</span></div>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_year">Year</span><span class="pd-info-val accent">2024</span></div>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_role">Role</span><span class="pd-info-val">Solo Developer</span></div>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_repo">Repo</span><span class="pd-info-val accent">Public ↗</span></div>
+      </div>
+
+      <div class="pd-info-card">
+        <span class="pd-info-label" data-k="pd_info_stack">// tech_stack</span>
+        <div class="pd-stack">
+          <div class="pd-stack-item"><i class="fa-brands fa-js pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">TypeScript</span><span class="pd-stack-role">Language</span></div>
+          <div class="pd-stack-item"><i class="fa-brands fa-react pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">React</span><span class="pd-stack-role">UI Library</span></div>
+          <div class="pd-stack-item"><i class="fa-brands fa-tailwind pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">Tailwind CSS</span><span class="pd-stack-role">Styling</span></div>
+          <div class="pd-stack-item"><i class="fa-solid fa-chart-line pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">Chart.js</span><span class="pd-stack-role">Analytics</span></div>
+        </div>
+      </div>
+
+      <div class="pd-related">
+        <div class="pd-related-title" data-k="pd_section_other">Other Projects</div>
+        <a href="#" class="pd-related-card" onclick="switchProject(0);return false;">
+          <div class="pd-related-icon"><i class="fa-solid fa-utensils" aria-hidden="true"></i></div>
+          <div><div class="pd-related-name">Allen's Kitchen</div><div class="pd-related-tech">HTML · PHP · MySQL</div></div>
+        </a>
+        <a href="#" class="pd-related-card" onclick="switchProject(2);return false;">
+          <div class="pd-related-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></div>
+          <div><div class="pd-related-name">Smart Automation</div><div class="pd-related-tech">Python · AI</div></div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PANEL: SMART AUTOMATION -->
+<div class="pd-panel" id="panel-2">
+  <div class="pd-hero">
+    <div class="pd-bg-num">03</div>
+    <p class="pd-eyebrow fi" data-k="pd_eyebrow_2">AI &amp; Automation</p>
+    <h1 class="pd-title fi">
+      Smart<br><span class="outline">Automation</span>
+    </h1>
+    <div class="pd-meta fi">
+      <span class="pd-meta-item"><span class="pd-meta-dot"></span><span data-k="pd_meta_2_0">Python Scripts</span></span>
+      <span class="pd-meta-item"><span class="pd-meta-dot"></span><span data-k="pd_meta_2_1">AI-Powered</span></span>
+      <span class="pd-meta-item"><span class="pd-meta-dot"></span><span data-k="pd_meta_2_2">2023 — Present</span></span>
+    </div>
+    <div class="pd-cta-row fi">
+      <a href="https://github.com/acetervin" class="btn-pri" target="_blank" data-k="pd_cta_view">View on GitHub ↗</a>
+      <a href="#overview-2" class="btn-sec" data-k="pd_cta_read">Read Case Study ↓</a>
+    </div>
+    <div class="pd-tags-row fi">
+      <span class="pd-tag">Python</span>
+      <span class="pd-tag">AI</span>
+      <span class="pd-tag">Automation</span>
+      <span class="pd-tag">Data</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="pd-body" id="overview-2">
+    <div>
+      <p class="pd-section-title fi" data-k="pd_section_overview">Overview</p>
+      <div class="pd-overview fi">
+        <p>An ongoing collection of Python automation scripts and AI-assisted tools, exploring how intelligent systems can eliminate repetitive tasks and surface useful insights from raw data.</p>
+        <p>The goal is practical automation — tools that actually save time in real workflows, from data processing pipelines to simple AI-powered assistants built on top of modern LLM APIs.</p>
+      </div>
+
+      <p class="pd-section-title fi" data-k="pd_section_screenshots">What's In Here</p>
+      <ul class="pd-features fi">
+        <li>Data scraping and processing scripts with structured CSV/JSON output</li>
+        <li>AI-assisted text classification and summarisation tools</li>
+        <li>Task automation scripts for file management and workflow orchestration</li>
+        <li>Experiments with cloud APIs (AWS Lambda, basic cloud functions)</li>
+        <li>Algorithmic exercises from coursework — sorting, searching, graph problems</li>
+      </ul>
+
+      <div class="pd-callout fi">
+        <div class="pd-callout-label" data-k="pd_section_challenge">// current focus</div>
+        <p>Currently exploring cloud deployment — taking scripts that run locally and making them run reliably on cloud infrastructure. Also diving into data structures more formally as part of university coursework.</p>
+      </div>
+
+      <div class="pd-callout fi">
+        <div class="pd-callout-label" data-k="pd_section_learning">// what i learned</div>
+        <p>Python's ecosystem is vast — this project has been my playground for exploring it. Working with real data (messy, incomplete, inconsistent) taught me more about defensive programming than any tutorial ever could.</p>
+      </div>
+    </div>
+
+    <div class="pd-sidebar fi">
+      <div class="pd-info-card">
+        <span class="pd-info-label" data-k="pd_info_stack">// tech_stack</span>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_status">Status</span><span class="pd-status wip"><span class="pd-status-dot"></span><span data-k="pd_status_wip">In Progress</span></span></div>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_type">Type</span><span class="pd-info-val">Scripts / Tools</span></div>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_year">Since</span><span class="pd-info-val accent">2023</span></div>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_role">Role</span><span class="pd-info-val">Solo</span></div>
+        <div class="pd-info-row"><span class="pd-info-key" data-k="pd_info_repo">Repo</span><span class="pd-info-val accent">Public ↗</span></div>
+      </div>
+
+      <div class="pd-info-card">
+        <span class="pd-info-label" data-k="pd_info_stack">// tech_stack</span>
+        <div class="pd-stack">
+          <div class="pd-stack-item"><i class="fa-brands fa-python pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">Python</span><span class="pd-stack-role">Core</span></div>
+          <div class="pd-stack-item"><i class="fa-solid fa-robot pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">AI APIs</span><span class="pd-stack-role">Intelligence</span></div>
+          <div class="pd-stack-item"><i class="fa-solid fa-cloud pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">AWS</span><span class="pd-stack-role">Cloud</span></div>
+          <div class="pd-stack-item"><i class="fa-solid fa-database pd-stack-icon" aria-hidden="true"></i><span class="pd-stack-name">SQLite / CSV</span><span class="pd-stack-role">Storage</span></div>
+        </div>
+      </div>
+
+      <div class="pd-related">
+        <div class="pd-related-title" data-k="pd_section_other">Other Projects</div>
+        <a href="#" class="pd-related-card" onclick="switchProject(0);return false;">
+          <div class="pd-related-icon"><i class="fa-solid fa-utensils" aria-hidden="true"></i></div>
+          <div><div class="pd-related-name">Allen's Kitchen</div><div class="pd-related-tech">HTML · PHP · MySQL</div></div>
+        </a>
+        <a href="#" class="pd-related-card" onclick="switchProject(1);return false;">
+          <div class="pd-related-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+          <div><div class="pd-related-name">Admin Dashboard</div><div class="pd-related-tech">TypeScript · React</div></div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" aria-hidden="true">
+  <div id="lightbox-content">
+    <div class="lightbox-inner">
+      <div class="lightbox-icon"><i class="fa-solid fa-image" aria-hidden="true"></i></div>
+      <div id="lightbox-title" class="lightbox-title"></div>
+      <div class="lightbox-hint">Add your screenshot here by replacing<br>this placeholder with an &lt;img&gt; tag</div>
+    </div>
+    <button id="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark" aria-hidden="true"></i> <span data-k="pd_lightbox_close">Close</span></button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="pd-footer">
+  <span class="f-copy">© 2025 Kevin Kamau</span>
+  <div class="footer-meta">
+    <span class="f-copy">Built with precision</span>
+    <span class="f-dot"></span>
+  </div>
+</footer>
+
+<script src="script/translations.js"></script>
+<script src="script/ui-core.js"></script>
+<script src="script/project-details.js"></script>
+
+</body>
+</html>
