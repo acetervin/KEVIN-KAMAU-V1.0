@@ -15,6 +15,13 @@ function setLang(l){
       }
     }
   });
+
+  // Update placeholders in forms that provide both English and Arabic variants
+  document.querySelectorAll('[data-ph-en]').forEach(function(el){
+    var ph = el.getAttribute('data-ph-' + l);
+    if (ph) el.placeholder = ph;
+  });
+
   if(l==='ar'){document.body.classList.add('lang-ar');document.documentElement.setAttribute('lang','ar');document.documentElement.setAttribute('dir','rtl');}
   else{document.body.classList.remove('lang-ar');document.documentElement.setAttribute('lang','en');document.documentElement.setAttribute('dir','ltr');}
   document.getElementById('btn-en').classList.toggle('active',l==='en');
@@ -35,7 +42,7 @@ window.addEventListener('scroll',function(){
 
 // Intersection observer for fade-in animations
 var io2=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.fi').forEach(function(el,i){el.style.transitionDelay=(i%5*0.08)+'s';io2.observe(el);});
+document.querySelectorAll('.fi, .ct-fi').forEach(function(el,i){el.style.transitionDelay=(i%5*0.08)+'s';io2.observe(el);});
 
 // Custom cursor tracking
 var cur=document.getElementById('cursor');
@@ -49,6 +56,128 @@ document.querySelectorAll('a,button,.s-card,.p-card,.theme-pill').forEach(functi
   el.addEventListener('mouseenter',function(){cur.style.transform='translate(-50%,-50%) scale(2.8)';cur.style.opacity='.55';});
   el.addEventListener('mouseleave',function(){cur.style.transform='translate(-50%,-50%) scale(1)';cur.style.opacity='1';});
 });
+
+/* ── CONTACT SECTION — ORBIT + FORM ───────────────────────────────────── */
+(function(){
+  var wrap = document.getElementById('atomWrap');
+  if (!wrap) return;
+
+  function squareStage(){
+    wrap.style.height = wrap.offsetWidth + 'px';
+  }
+  squareStage();
+  window.addEventListener('resize', squareStage);
+
+  var CX = 210, CY = 210, RX = 178, RY = 57;
+  var TILTS = [0, Math.PI/3, (2*Math.PI)/3];
+  var SPEEDS = [0.42, 0.36, 0.48];
+  var NODE_DEF = [
+    {id:'n0', e:0, offset:0},
+    {id:'n1', e:0, offset:Math.PI},
+    {id:'n2', e:1, offset:Math.PI/6},
+    {id:'n3', e:1, offset:Math.PI/6 + Math.PI},
+  ];
+
+  var nodes = NODE_DEF.map(function(d){
+    return {id:d.id,e:d.e,angle:d.offset,paused:false,el:document.getElementById(d.id)};
+  });
+
+  nodes.forEach(function(n){
+    if (!n.el) return;
+    n.el.addEventListener('mouseenter', function(){ n.paused = true; });
+    n.el.addEventListener('mouseleave', function(){ n.paused = false; });
+  });
+
+  function ellipsePoint(theta, tilt){
+    var lx = RX * Math.cos(theta), ly = RY * Math.sin(theta);
+    var c = Math.cos(tilt), s = Math.sin(tilt);
+    return {x: CX + lx*c - ly*s, y: CY + lx*s + ly*c};
+  }
+
+  function depthScale(y){
+    var t = (y - (CY - RX)) / (2 * RX);
+    return 0.68 + t * 0.32;
+  }
+
+  var lastTs = null;
+  function tick(ts){
+    if (!lastTs) lastTs = ts;
+    var dt = Math.min((ts - lastTs) / 1000, 0.05);
+    lastTs = ts;
+
+    var wPx = wrap.offsetWidth || 420;
+    var hPx = wrap.offsetHeight || 420;
+    var scaleX = wPx / 420;
+    var scaleY = hPx / 420;
+
+    nodes.forEach(function(n){
+      if (!n.el) return;
+      if (!n.paused) n.angle += SPEEDS[n.e] * dt;
+      var pos = ellipsePoint(n.angle, TILTS[n.e]);
+      var ds = depthScale(pos.y);
+      n.el.style.left = (pos.x * scaleX) + 'px';
+      n.el.style.top  = (pos.y * scaleY) + 'px';
+      n.el.style.zIndex = Math.round(pos.y);
+      n.el.style.opacity = (0.5 + ((ds - 0.68) / 0.32) * 0.5).toFixed(3);
+      n.el.style.transform = n.paused
+        ? 'translate(-50%,-50%) scale(1.22)'
+        : 'translate(-50%,-50%) scale(' + ds.toFixed(3) + ')';
+    });
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+function cfSubmit(){
+  var ids = ['cf-name','cf-email','cf-subject','cf-msg'];
+  var valid = true;
+  ids.forEach(function(id){
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('err');
+    if (!el.value.trim()) { el.classList.add('err'); valid = false; }
+  });
+  if (!valid) return;
+
+  var btn = document.getElementById('cf-btn');
+  var btnTxt = document.getElementById('cf-btn-txt');
+  var btnIco = document.getElementById('cf-btn-ico');
+  var lang = document.documentElement.lang || 'en';
+
+  if (btn) btn.classList.add('sending');
+  if (btnTxt) btnTxt.textContent = lang === 'ar' ? 'جارٍ الإرسال...' : 'Sending...';
+  if (btnIco) btnIco.innerHTML = '<span class="cf-spin">&#9696;</span>';
+
+  setTimeout(function(){
+    var fields = document.getElementById('cf-fields');
+    var success = document.getElementById('cf-success');
+    if (fields) fields.style.display = 'none';
+    if (success) success.classList.add('show');
+  }, 1800);
+}
+
+function cfReset(){
+  var fields = document.getElementById('cf-fields');
+  var success = document.getElementById('cf-success');
+  if (fields) fields.style.display = 'block';
+  if (success) success.classList.remove('show');
+
+  ['cf-name','cf-email','cf-subject','cf-msg'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.value = '';
+    el.classList.remove('err');
+  });
+
+  var btn = document.getElementById('cf-btn');
+  var btnTxt = document.getElementById('cf-btn-txt');
+  var btnIco = document.getElementById('cf-btn-ico');
+  var lang = document.documentElement.lang || 'en';
+  if (btn) btn.classList.remove('sending');
+  if (btnTxt) btnTxt.textContent = T[lang] ? T[lang].form_send : 'Send Message';
+  if (btnIco) btnIco.textContent = '→';
+}
 
 /* ── POP BROWSER ─────────────────────────────────────── */
 (function () {
@@ -330,76 +459,4 @@ document.querySelectorAll('a,button,.s-card,.p-card,.theme-pill').forEach(functi
     }
   });
 
-})();
-
-/* ── EXPERIENCE (LinkedIn fetch + local fallback) ───────────────────────── */
-(function(){
-  'use strict';
-
-  var expStatus = document.getElementById('exp-status');
-  var expList   = document.getElementById('exp-list');
-
-  function t(key){
-    return (T[lang] && T[lang][key]) || key;
-  }
-
-  function setStatus(key){
-    if(!expStatus) return;
-    expStatus.textContent = t(key);
-  }
-
-  function renderExperience(items){
-    if(!expList) return;
-    expList.innerHTML = '';
-    (items || []).forEach(function(item){
-      var card = document.createElement('div');
-      card.className = 'exp-card fi';
-      card.innerHTML =
-        '<div class="exp-top">' +
-          '<div class="exp-company">' + (item.company || '') + '</div>' +
-          '<div class="exp-title">' + (item.role || '') + '</div>' +
-          '<div class="exp-dates">' + (item.dates || '') + '</div>' +
-        '</div>' +
-        '<div class="exp-bullets"><ul>' +
-          ((item.bullets || []).map(function(b){ return '<li>' + b + '</li>'; }).join('')) +
-        '</ul></div>';
-      expList.appendChild(card);
-    });
-  }
-
-  function loadLocalData(){
-    return fetch('data/experience.json', {cache:'no-cache'})
-      .then(function(r){ if(!r.ok) throw new Error('no local data'); return r.json(); });
-  }
-
-  function loadLinkedIn(){
-    var url = 'https://www.linkedin.com/in/devkevin75/';
-    return fetch(url, {mode:'cors'}).then(function(resp){
-      if (!resp.ok) throw new Error('linkedIn fail');
-      return resp.text();
-    });
-  }
-
-  function loadExperience(){
-    if(!expStatus || !expList) return;
-    setStatus('exp_loading');
-
-    loadLinkedIn().then(function(){
-      // Most browsers will block LinkedIn in an iframe and CORS will reject the fetch.
-      // If it does succeed, we still fall back to local data because parsing LinkedIn HTML is brittle.
-      return loadLocalData();
-    }).catch(function(){
-      setStatus('exp_failed');
-      return loadLocalData();
-    }).then(function(data){
-      if (data && data.length) {
-        renderExperience(data);
-        setStatus('exp_fallback');
-      }
-    }).catch(function(){
-      // keep error status
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', loadExperience);
 })();
