@@ -154,13 +154,55 @@
     <iframe id="pb-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
 
     <div id="pb-blocked">
-      <div id="pb-blocked-icon">&#128683;</div>
-      <div id="pb-blocked-title">X-Frame-Options Blocked</div>
-      <div id="pb-blocked-msg">
-        This site prevents embedding in iframes (common for GitHub, LinkedIn, Twitter).
-        Open it directly in a new tab instead.
+      <div class="pb-blocked-inner">
+        <div class="pb-blocked-decor">
+          <span class="d-1"></span><span class="d-2"></span><span class="d-3"></span>
+        </div>
+        
+        <div class="pb-blocked-content">
+          <div class="pb-blocked-icon-wrap">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div class="pb-icon-glow"></div>
+          </div>
+          
+          <div class="pb-status-tag">CONNECTION_RESTRICTED</div>
+          
+          <h3 class="pb-main-title">Embed Protocol Blocked</h3>
+          
+          <p class="pb-main-msg">
+            The remote host <span class="url-highlight" id="pb-blocked-url-hint"></span> has refused an inline connection. This security policy prevents content spoofing.
+          </p>
+
+          <div class="pb-data-grid">
+            <div class="pb-data-item">
+              <span class="pb-data-label">ERROR_CODE</span>
+              <span class="pb-data-val">X-FRAME-OPTIONS: DENY</span>
+            </div>
+            <div class="pb-data-item">
+              <span class="pb-data-label">REASON</span>
+              <span class="pb-data-val">Security Header Conflict</span>
+            </div>
+          </div>
+
+          <div class="pb-blocked-actions">
+            <a id="pb-blocked-open" href="#" target="_blank" class="pb-action-btn primary">
+              <span>CONTINUE TO SITE</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <button class="pb-action-btn secondary" onclick="document.getElementById('pb-close').click()">
+              <span>CLOSE BROWSER</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pb-blocked-bottom">
+          <div class="pb-scan-line"></div>
+          <div class="pb-bottom-meta">
+            <span>SYSTEM_DIAGNOSTIC_v2.0</span>
+            <span>SECURE_BYPASS_READY</span>
+          </div>
+        </div>
       </div>
-      <a id="pb-blocked-open" href="#" target="_blank">Open in New Tab &#8599;</a>
     </div>
   </div>
 </div>

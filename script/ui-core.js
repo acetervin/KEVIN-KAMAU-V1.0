@@ -288,15 +288,18 @@ function cfReset(){
     iframe.style.display = 'none';
     blocked.classList.add('show');
     blockedOpen.href = url;
-    finishLoad();
-
-    // Only open one external tab per blocked navigation (prevents spam-open loops)
-    if (!blockedOpened) {
-      blockedOpened = true;
-      window.open(url, '_blank');
-      browser.classList.remove('open');
-      iframe.src = 'about:blank';
+    
+    var urlHint = document.getElementById('pb-blocked-url-hint');
+    if(urlHint) {
+      try {
+        var domain = new URL(url).hostname;
+        urlHint.textContent = '[' + domain + ']';
+      } catch(e) {
+        urlHint.textContent = '[REMOTE_HOST]';
+      }
     }
+    
+    finishLoad();
   }
 
   function navigate(url, addToHistory) {
