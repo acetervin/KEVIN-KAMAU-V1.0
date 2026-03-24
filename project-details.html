@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-k="pd_title">Project Details — Kevin Kamau</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="t-primary">
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">KK.DEV</a>
+  <a href="index.html#projects" class="nav-back" data-k="pd_nav_back">Back to Projects</a>
+  <div class="controls">
+    <div class="lang-sw">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button id="btn-ar" onclick="setLang('ar')">عر</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PROJECT TABS — populated by project-details.js from data/projects.json -->
+<div class="pd-selector"></div>
+
+
+<!-- LIGHTBOX -->
+<div id="lightbox" aria-hidden="true">
+  <div id="lightbox-content">
+    <div class="lightbox-inner">
+      <div class="lightbox-icon"><i class="fa-solid fa-image" aria-hidden="true"></i></div>
+      <div id="lightbox-title" class="lightbox-title"></div>
+      <div class="lightbox-hint">Add your screenshot here by replacing<br>this placeholder with an &lt;img&gt; tag</div>
+    </div>
+    <button id="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark" aria-hidden="true"></i> <span data-k="pd_lightbox_close">Close</span></button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="pd-footer">
+  <span class="f-copy">© <span id="current-year"></span> Kevin Kamau — All rights reserved</span>
+  <div class="footer-meta">
+    <span class="f-copy">Built with precision</span>
+    <span class="f-dot"></span>
+  </div>
+</footer>
+
+<script src="script/translations.js"></script>
+<script src="script/ui-core.js"></script>
+<script src="script/project-details.js"></script>
+
+</body>
+</html>

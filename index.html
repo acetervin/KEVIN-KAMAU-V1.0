@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kevin Kamau — Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="t-primary">
+
+<div id="grid-bg"></div>
+<div id="progress"></div>
+<div id="cursor"></div>
+
+<!-- LOADER -->
+<div id="loader" style="display:none">
+  <div>
+    <div class="term-window">
+      <div class="term-bar">
+        <div class="term-btns"><span class="tb tb-r"></span><span class="tb tb-y"></span><span class="tb tb-g"></span></div>
+        <span class="term-title">kevin_kamau.sh</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line" id="tl0"></div>
+        <div class="term-line" id="tl1"></div>
+        <div class="term-line" id="tl2"></div>
+        <div class="term-line" id="tl3"></div>
+        <div class="term-line" id="tl4"></div>
+        <div class="term-line" id="tl5"></div>
+        <div class="term-line" id="tl6"></div>
+        <div class="term-line" id="tl7"></div>
+        <div class="term-line" id="tl8"></div>
+        <div class="term-line" id="tl9"></div>
+        <div class="tl-cursor" id="tlcur"></div>
+        <!-- Network gauge widget -->
+        <div id="net-gauge" style="display:none;margin-top:.8rem;padding:.8rem;background:rgba(212,168,75,.06);border:1px solid rgba(212,168,75,.2);border-radius:6px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;">
+            <span style="font-size:.65rem;color:#d4a84b;letter-spacing:.15em;">DOWNLOAD</span>
+            <span id="ng-mbps" style="font-size:1.1rem;font-weight:700;color:#d4a84b;">-- Mbps</span>
+            <span id="ng-quality" style="font-size:.62rem;letter-spacing:.1em;">--</span>
+          </div>
+          <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;">
+            <div id="ng-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#d4a84b,#e8c87a);border-radius:3px;transition:width .5s ease;box-shadow:0 0 8px rgba(212,168,75,.5);"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:.5rem;">
+            <span style="font-size:.58rem;color:rgba(255,255,255,.25);">0</span>
+            <span style="font-size:.58rem;color:rgba(255,255,255,.25);">25 Mbps</span>
+            <span style="font-size:.58rem;color:rgba(255,255,255,.25);">100+</span>
+          </div>
+          <div style="margin-top:.6rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;text-align:center;">
+            <div><div id="ng-ping" style="font-size:.9rem;font-weight:700;color:#64b5f6;">--</div><div style="font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">PING ms</div></div>
+            <div><div id="ng-load" style="font-size:.9rem;font-weight:700;color:#28c840;">--</div><div style="font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">EST LOAD</div></div>
+            <div><div id="ng-size" style="font-size:.9rem;font-weight:700;color:#d4a84b;">760KB</div><div style="font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">PAGE SIZE</div></div>
+          </div>
+          <div style="margin-top:.5rem;text-align:center;">
+            <span id="ng-type" style="font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.25);letter-spacing:.12em;">DETECTING...</span>
+          </div>
+        </div>
+      </div>
+      <div class="term-pw"><div class="term-pb" id="tpbar"></div></div>
+    </div>
+    <div class="skip-hint">click anywhere to skip</div>
+  </div>
+</div>
+
+<!-- MINIGAME -->
+<div id="minigame">
+  <div id="mg-inner">
+    <button class="mg-close" onclick="closeGame()">✕</button>
+    <div id="mg-content"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">KK.DEV</a>
+  <ul class="nav-links">
+    <li><a href="#about"    data-k="nav_about">About</a></li>
+    <li><a href="#skills"   data-k="nav_skills">Skills</a></li>
+    <li><a href="#projects" data-k="nav_projects">Projects</a></li>
+    <li><a href="#contact"  data-k="nav_contact">Contact</a></li>
+  </ul>
+  <div class="controls">
+    <div class="lang-sw">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button id="btn-ar" onclick="setLang('ar')">عر</button>
+    </div>
+    <div class="theme-pill" onclick="toggleTheme()">
+      <span data-k="theme_lbl">Theme</span>
+      <div class="theme-dot"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <p class="hero-eyebrow fi" data-k="eyebrow">Software Engineer · <i class="fa-solid fa-flag" aria-hidden="true"></i> Kenya</p>
+  <h1 class="hero-name fi">
+    <span data-k="name1">KEVIN</span><br>
+    <span class="outline" data-k="name2">KAMAU</span><br>
+    <span class="hi" data-k="name3">BUILDS.</span>
+  </h1>
+  <p class="hero-desc fi" data-k="desc">Building smart, secure, and seamless digital solutions. Software Engineering student exploring automations, full-stack systems, and everything in between.</p>
+  <div class="hero-cta fi">
+    <a href="https://github.com/acetervin" target="_blank" class="btn-pri" data-k="cta1">GitHub Profile →</a>
+    <a href="#contact" class="btn-sec" data-k="cta2">Get in Touch</a>
+  </div>
+  <!-- 3D Canvas -->
+  <div id="hero3d-wrap">
+    <canvas id="geo-canvas"></canvas>
+    <div id="face-label"></div>
+  </div>
+  <div class="hero-badge"><span data-k="badge">Open to opportunities · 2025</span></div>
+</section>
+
+<!-- POP BROWSER -->
+<div id="pop-browser">
+  <!-- Resize handles (8 directions) -->
+  <div class="pb-resize top"    data-dir="top"></div>
+  <div class="pb-resize right"  data-dir="right"></div>
+  <div class="pb-resize bottom" data-dir="bottom"></div>
+  <div class="pb-resize left"   data-dir="left"></div>
+  <div class="pb-resize tr"     data-dir="tr"></div>
+  <div class="pb-resize tl"     data-dir="tl"></div>
+  <div class="pb-resize br"     data-dir="br"></div>
+  <div class="pb-resize bl"     data-dir="bl"></div>
+
+  <!-- Title bar -->
+  <div id="pb-titlebar">
+    <button class="pb-btn" id="pb-close"    title="Close"></button>
+    <button class="pb-btn" id="pb-minimise" title="Minimise"></button>
+    <button class="pb-btn" id="pb-maximise" title="Maximise"></button>
+    <div id="pb-urlbar">
+      <button id="pb-back"    title="Back">&#9664;</button>
+      <button id="pb-fwd"     title="Forward">&#9654;</button>
+      <button id="pb-refresh" title="Refresh">&#8635;</button>
+      <div id="pb-url-display"><span id="pb-url-text">about:blank</span></div>
+      <a id="pb-open-ext" href="#" target="_blank">&#8599; Open</a>
+    </div>
+  </div>
+
+  <!-- Loading bar -->
+  <div id="pb-loadbar-wrap"><div id="pb-loadbar"></div></div>
+
+  <!-- iframe content + blocked overlay -->
+  <div id="pb-content">
+    <iframe id="pb-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+
+    <div id="pb-blocked">
+      <div id="pb-blocked-icon">&#128683;</div>
+      <div id="pb-blocked-title">X-Frame-Options Blocked</div>
+      <div id="pb-blocked-msg">
+        This site prevents embedding in iframes (common for GitHub, LinkedIn, Twitter).
+        Open it directly in a new tab instead.
+      </div>
+      <a id="pb-blocked-open" href="#" target="_blank">Open in New Tab &#8599;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="fi">
+    <p class="sec-label" data-k="about_lbl">About Me</p>
+    <h2 class="sec-title" data-k="about_title">Building smart systems<br>from Nairobi</h2>
+    <p class="about-p" data-k="about1">Software Engineering student building smart, secure, and seamless digital solutions. Passionate about automations, full-stack web development, and AI-integrated systems.</p>
+    <p class="about-p" data-k="about2">Currently focused on mastering Cloud, DevOps, and Data Structures while shipping real-world projects. Mission: a full online food ordering and management system.</p>
+    <div class="stats">
+      <div><div class="stat-num">12</div><div class="stat-lbl" data-k="s_proj">Repos</div></div>
+      <div><div class="stat-num">6+</div><div class="stat-lbl" data-k="s_stack">Languages</div></div>
+      <div><div class="stat-num">∞</div><div class="stat-lbl" data-k="s_drive">Drive</div></div>
+    </div>
+  </div>
+  <div class="fi">
+    <div class="about-card">
+      <span class="card-tag">// current_status</span>
+      <div class="card-row">
+        <div><span class="k">name</span>     → Kevin Kamau</div>
+        <div><span class="k">handle</span>   → @acetervin</div>
+        <div><span class="k">role</span>     → Software Engineer</div>
+        <div><span class="k">location</span> → Nairobi, Kenya <i class="fa-solid fa-flag" aria-hidden="true"></i></div>
+        <div><span class="k">stack</span>    → TS · Node · Python · HTML · JS</div>
+        <div><span class="k">status</span>   → <span class="available">● Open to Work</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-wrap" id="experience">
+  <div class="exp-inner">
+
+    <!-- ── Left: sticky label + snapshot card ── -->
+    <div class="exp-label-col">
+      <p class="sec-label" data-k="exp_lbl">Experience</p>
+      <h2 class="sec-title" data-k="exp_title">Where I've<br>been building</h2>
+
+      <div class="exp-summary-card">
+        <span class="card-tag">// career_snapshot</span>
+        <div class="exp-stat-row">
+
+          <div class="exp-stat">
+            <span class="exp-stat-icon"><i class="fa-solid fa-briefcase" aria-hidden="true"></i></span>
+            <div class="exp-stat-info">
+              <div class="exp-stat-val">3</div>
+              <div class="exp-stat-lbl" data-k="exp_stat_work">Work Roles</div>
+            </div>
+          </div>
+
+          <div class="exp-stat">
+            <span class="exp-stat-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span>
+            <div class="exp-stat-info">
+              <div class="exp-stat-val">2023 — Present</div>
+              <div class="exp-stat-lbl" data-k="exp_stat_university">University</div>
+            </div>
+          </div>
+
+          <div class="exp-stat">
+            <span class="exp-stat-icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+            <div class="exp-stat-info">
+              <div class="exp-stat-val">12+</div>
+              <div class="exp-stat-lbl" data-k="exp_stat_repos">Open Source Repos</div>
+            </div>
+          </div>
+
+          <div class="exp-stat">
+            <span class="exp-stat-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+            <div class="exp-stat-info">
+              <div class="exp-stat-val">Nairobi, KE</div>
+              <div class="exp-stat-lbl" data-k="exp_stat_location">Location</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /label-col -->
+
+    <!-- ── Right: vertical timeline ── -->
+    <div class="exp-timeline">
+
+      <!-- Entry 1: Family Peace Association Kenya -->
+      <div class="exp-entry active fi">
+        <span class="exp-type work" data-k="exp_type_work">Work</span>
+        <div class="exp-role" data-k="exp_role_1">Full Stack Developer</div>
+        <div class="exp-org" data-k="exp_org_1">Family Peace Association Kenya</div>
+        <div class="exp-period" data-k="exp_period_1">
+          May 2025 — Sep 2025
+          <span class="exp-badge done">Completed</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed a clean, responsive UI with React + Tailwind from scratch for a Nairobi-based NGO.</li>
+          <li>Built content sections covering programmes, events, and impact stories for community engagement.</li>
+          <li>Collaborated with NGO coordinators to translate operational requirements into technical solutions.</li>
+          <li>Optimised for mobile and low-bandwidth connections used by field workers.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">React</span>
+          <span class="exp-tag">Tailwind</span>
+          <span class="exp-tag">JavaScript</span>
+          <span class="exp-tag">Web Design</span>
+          <span class="exp-tag">UI/UX</span>
+        </div>
+      </div>
+
+      <!-- Entry 1b: First Interior Designs -->
+      <div class="exp-entry fi">
+        <span class="exp-type work">Freelance</span>
+        <div class="exp-role">Freelance Web Developer</div>
+        <div class="exp-org">First Interiors · firstinteriordesigns.co.ke</div>
+        <div class="exp-period">
+          Jul 2025 — Sep 2025
+          <span class="exp-badge done">Completed</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed and built a premium portfolio website for a Nairobi interior design studio — remote engagement.</li>
+          <li>Created an editorial, mobile-first layout with portfolio gallery and contact integration.</li>
+          <li>Delivered web design, web maintenance, and 3+ additional skills across the project lifecycle.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Web Design</span>
+          <span class="exp-tag">HTML</span>
+          <span class="exp-tag">CSS</span>
+          <span class="exp-tag">Web Maintenance</span>
+        </div>
+      </div>
+
+      <!-- Entry 1c: Tetezi Properties -->
+      <div class="exp-entry fi">
+        <span class="exp-type work">Freelance</span>
+        <div class="exp-role">Web Developer</div>
+        <div class="exp-org">Tetezi Properties · teteziproperties.co.ke</div>
+        <div class="exp-period">
+          Nov 2025 — Feb 2026
+          <span class="exp-badge done">Completed</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built and maintained web systems for a Kilimani-based real estate developer — hybrid engagement.</li>
+          <li>Developed property listing pages, UI components, and handled ongoing web content management.</li>
+          <li>Delivered web content management, web maintenance, and 2+ additional skills.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Web Dev</span>
+          <span class="exp-tag">CMS</span>
+          <span class="exp-tag">Web Maintenance</span>
+          <span class="exp-tag">JavaScript</span>
+        </div>
+      </div>
+
+      <!-- Entry 2: Kirinyaga University -->
+      <div class="exp-entry fi">
+        <span class="exp-type edu" data-k="exp_type_edu">Education</span>
+        <div class="exp-role" data-k="exp_role_2">BSc. Software Engineering</div>
+        <div class="exp-org" data-k="exp_org_2">Kirinyaga University</div>
+        <div class="exp-period" data-k="exp_period_2">
+          2023 — Present
+          <span class="exp-badge current">Current</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Studying core Computer Science fundamentals — Data Structures, Algorithms, Operating Systems, Computer Architecture.</li>
+          <li>Coursework in System Analysis &amp; Design, Database Systems, and AI principles.</li>
+          <li>Building real-world projects alongside coursework — most notably the Allen's Kitchen restaurant platform.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Data Structures</span>
+          <span class="exp-tag">Algorithms</span>
+          <span class="exp-tag">Database Systems</span>
+          <span class="exp-tag">AI</span>
+          <span class="exp-tag">OS</span>
+        </div>
+      </div>
+
+      <!-- Entry 3: Open Source -->
+      <div class="exp-entry fi">
+        <span class="exp-type open" data-k="exp_type_open">Open Source</span>
+        <div class="exp-role" data-k="exp_role_3">Open Source Contributor &amp; Community Builder</div>
+        <div class="exp-org" data-k="exp_org_3">GitHub · @acetervin</div>
+        <div class="exp-period" data-k="exp_period_3">2023 — Present</div>
+        <ul class="exp-bullets">
+          <li>Maintaining 12+ public repositories covering full-stack web, automation, and UI projects.</li>
+          <li>Contributing to community tech initiatives in Nairobi — building tools that serve local needs.</li>
+          <li>Flagship project: Allen's Kitchen — a complete food ordering &amp; management system open for collaboration.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">GitHub</span>
+          <span class="exp-tag">Open Source</span>
+          <span class="exp-tag">Community</span>
+          <span class="exp-tag">Collaboration</span>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+  </div><!-- /inner -->
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="skills-wrap" id="skills">
+  <div class="skills-inner">
+    <p class="sec-label fi" data-k="sk_lbl">Technical Skills</p>
+    <h2 class="sec-title fi" data-k="sk_title">My Toolkit</h2>
+    <div class="skill-grid">
+      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-html5" aria-hidden="true"></i></span><div class="s-name">HTML5/CSS3</div><div class="s-lvl" data-k="expert">Expert</div><div class="s-bar"><div class="s-fill" style="width:92%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-js" aria-hidden="true"></i></span><div class="s-name">JavaScript</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:85%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-python" aria-hidden="true"></i></span><div class="s-name">Python</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:82%"></div></div></div>
+
+      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i></span><div class="s-name">Tailwind CSS</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:88%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-react" aria-hidden="true"></i></span><div class="s-name">React</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:60%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-node-js" aria-hidden="true"></i></span><div class="s-name">Node.js</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:58%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span><div class="s-name">PostgreSQL</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:72%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon"><i class="fa-solid fa-fire" aria-hidden="true"></i></span><div class="s-name">Firebase</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:74%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></span><div class="s-name">Git / GitHub</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:85%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-aws" aria-hidden="true"></i></span><div class="s-name">Cloud / AWS</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:40%"></div></div></div>
+      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-figma" aria-hidden="true"></i></span><div class="s-name">Figma</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:70%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="proj-wrap" id="projects">
+  <p class="sec-label fi" data-k="pj_lbl">Selected Work</p>
+  <h2 class="sec-title fi" data-k="pj_title">Projects</h2>
+  <div class="proj-grid">
+    <div class="p-card fi">
+      <div class="p-thumb"><span class="p-num">01</span><div class="p-thumb-inner"><i class="fa-solid fa-utensils" aria-hidden="true"></i></div></div>
+      <div class="p-body">
+        <div class="p-tags"><span class="p-tag">HTML</span><span class="p-tag">CSS</span><span class="p-tag">JS</span><span class="p-tag">PHP</span></div>
+        <h3 class="p-title" data-k="p1t">Allen's Kitchen</h3>
+        <p class="p-desc" data-k="p1d">A smart restaurant ordering platform — the flagship project. Full online food ordering and management system with a clean dashboard UI.</p>
+        <div class="p-actions">
+          <a href="https://github.com/acetervin/Allen-s_Kitchen" target="_blank" data-browser="true" class="p-link p-link-pri" data-k="view_cs">GitHub ↗</a>
+          <a href="project-details.html?p=0" class="p-link p-link-sec" data-k="read_cs">Case Study →</a>
+        </div>
+      </div>
+    </div>
+    <div class="p-card fi">
+      <div class="p-thumb"><span class="p-num">02</span><div class="p-thumb-inner"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div></div>
+      <div class="p-body">
+        <div class="p-tags"><span class="p-tag">TypeScript</span><span class="p-tag">React</span></div>
+        <h3 class="p-title" data-k="p2t">Admin Dashboard</h3>
+        <p class="p-desc" data-k="p2d">A fully-featured admin dashboard built with TypeScript, featuring data tables, analytics views, and a clean management interface.</p>
+        <div class="p-actions">
+          <a href="https://github.com/acetervin/Admin-dashboard" target="_blank" data-browser="true" class="p-link p-link-pri" data-k="view_cs">GitHub ↗</a>
+          <a href="project-details.html?p=1" class="p-link p-link-sec" data-k="read_cs">Case Study →</a>
+        </div>
+      </div>
+    </div>
+    <div class="p-card fi">
+      <div class="p-thumb"><span class="p-num">03</span><div class="p-thumb-inner"><i class="fa-solid fa-robot" aria-hidden="true"></i></div></div>
+      <div class="p-body">
+        <div class="p-tags"><span class="p-tag">Python</span><span class="p-tag">AI</span><span class="p-tag">Automation</span></div>
+        <h3 class="p-title" data-k="p3t">Smart Automation</h3>
+        <p class="p-desc" data-k="p3d">Exploring AI-powered automations and intelligent systems — from data structures to cloud-native solutions.</p>
+        <div class="p-actions">
+          <a href="https://github.com/acetervin" target="_blank" data-browser="true" class="p-link p-link-pri" data-k="view_cs">GitHub ↗</a>
+          <a href="project-details.html?p=2" class="p-link p-link-sec" data-k="read_cs">Case Study →</a>
+        </div>
+      </div>
+    </div>
+    <div class="p-card fi">
+      <div class="p-thumb"><span class="p-num">04</span><div class="p-thumb-inner"><i class="fa-solid fa-dove" aria-hidden="true"></i></div></div>
+      <div class="p-body">
+        <div class="p-tags"><span class="p-tag">React</span><span class="p-tag">Tailwind</span><span class="p-tag">JS</span></div>
+        <h3 class="p-title">Family Peace Association</h3>
+        <p class="p-desc">Clean, responsive NGO website built with React + Tailwind. Covers programmes, events, and impact stories for a Nairobi-based peace-building organisation.</p>
+        <div class="p-actions">
+          <a href="https://familypeaceassociationkenya.org/" target="_blank" data-browser="true" class="p-link p-link-pri">Live Site ↗</a>
+          <a href="project-details.html?p=3" class="p-link p-link-sec">Case Study →</a>
+        </div>
+      </div>
+    </div>
+    <div class="p-card fi">
+      <div class="p-thumb"><span class="p-num">05</span><div class="p-thumb-inner"><i class="fa-solid fa-couch" aria-hidden="true"></i></div></div>
+      <div class="p-body">
+        <div class="p-tags"><span class="p-tag">Web Design</span><span class="p-tag">HTML</span><span class="p-tag">CSS</span></div>
+        <h3 class="p-title">First Interior Designs</h3>
+        <p class="p-desc">Premium portfolio website for a Nairobi interior design studio. Mobile-first, visually editorial, with portfolio gallery and contact integration.</p>
+        <div class="p-actions">
+          <a href="https://www.firstinteriordesigns.co.ke/" target="_blank" data-browser="true" class="p-link p-link-pri">Live Site ↗</a>
+          <a href="project-details.html?p=4" class="p-link p-link-sec">Case Study →</a>
+        </div>
+      </div>
+    </div>
+    <div class="p-card fi">
+      <div class="p-thumb"><span class="p-num">06</span><div class="p-thumb-inner"><i class="fa-solid fa-building" aria-hidden="true"></i></div></div>
+      <div class="p-body">
+        <div class="p-tags"><span class="p-tag">Web Dev</span><span class="p-tag">Maintenance</span><span class="p-tag">CMS</span></div>
+        <h3 class="p-title">Tetezi Properties</h3>
+        <p class="p-desc">Web development and ongoing maintenance for a Kilimani-based real estate developer. Property listings, UI components, and content management.</p>
+        <div class="p-actions">
+          <a href="https://teteziproperties.co.ke/" target="_blank" data-browser="true" class="p-link p-link-pri">Live Site ↗</a>
+          <a href="project-details.html?p=5" class="p-link p-link-sec">Case Study →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="contact-wrap" id="contact">
+  <div class="contact-inner">
+
+    <div class="contact-top ct-fi">
+      <p class="sec-label" data-k="ct_lbl">Contact</p>
+      <h2 class="contact-big" data-k="ct_title">Let's build<br>something great.</h2>
+      <p class="contact-sub" data-k="ct_sub">Open to collaborations, open source contributions, and interesting builds. Based in Nairobi — let's connect.</p>
+    </div>
+
+    <div class="contact-bottom">
+
+      <div class="atom-col ct-fi">
+        <div class="atom-stage" id="atomWrap">
+
+          <svg class="atom-svg" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="cg" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(212,168,75,0.12)"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+            </defs>
+            <ellipse cx="210" cy="210" rx="80" ry="80" fill="url(#cg)"/>
+            <ellipse class="orbit-ellipse" cx="210" cy="210" rx="178" ry="57" transform="rotate(0 210 210)"/>
+            <ellipse class="orbit-ellipse" cx="210" cy="210" rx="178" ry="57" transform="rotate(60 210 210)"/>
+            <ellipse class="orbit-ellipse" cx="210" cy="210" rx="178" ry="57" transform="rotate(120 210 210)"/>
+          </svg>
+
+          <div class="atom-center">
+            <div class="atom-profile-ring">
+              <img src="assets/avatar.jpg" alt="Kevin Kamau" class="atom-avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="atom-avatar-emoji" style="display:none">KK</div>
+              <div class="atom-online-dot"></div>
+            </div>
+          </div>
+
+          <a href="https://github.com/acetervin" id="n0" class="orbit-node n-github" target="_blank" rel="noopener">
+            <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.468-2.382 1.236-3.222-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.652.243 2.873.12 3.176.77.84 1.235 1.912 1.235 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.823 1.102.823 2.222v3.293c0 .322.216.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z"/></svg></span>
+            <span class="lbl">GitHub</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/devkevin75/" id="n1" class="orbit-node n-linkedin" target="_blank" rel="noopener">
+            <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
+            <span class="lbl">LinkedIn</span>
+          </a>
+
+          <a href="https://x.com/Realcrptonite" id="n2" class="orbit-node n-twitter" target="_blank" rel="noopener">
+            <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></span>
+            <span class="lbl">Twitter</span>
+          </a>
+
+          <a href="mailto:kamaukevin871@gmail.com" id="n3" class="orbit-node n-email">
+            <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+            <span class="lbl">Email</span>
+          </a>
+
+        </div><!-- /atom-stage -->
+
+        <div class="atom-mobile">
+          <div class="atom-mobile-ring">
+            <img src="assets/avatar.jpg" alt="Kevin Kamau" class="atom-avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="atom-avatar-emoji" style="display:none">KK</div>
+            <div class="atom-mobile-dot"></div>
+          </div>
+          <nav class="mobile-grid">
+            <a href="https://github.com/acetervin" class="mobile-node n-github" target="_blank"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.468-2.382 1.236-3.222-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.652.243 2.873.12 3.176.77.84 1.235 1.912 1.235 3.222 0 4.61-2.807 5.625-5.48 5.92.43.372.823 1.102.823 2.222v3.293c0 .322.216.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z"/></svg></span><span class="lbl">GitHub</span></a>
+            <a href="https://www.linkedin.com/in/devkevin75/" class="mobile-node n-linkedin" target="_blank"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span><span class="lbl">LinkedIn</span></a>
+            <a href="https://x.com/Realcrptonite" class="mobile-node n-twitter" target="_blank"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></span><span class="lbl">Twitter</span></a>
+            <a href="mailto:kamaukevin871@gmail.com" class="mobile-node n-email"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></span><span class="lbl">Email</span></a>
+          </nav>
+        </div>
+      </div><!-- /atom-col -->
+
+      <div class="ct-fi" style="transition-delay:.1s;">
+        <div class="cf-card">
+          <span class="cf-tag">// send_message</span>
+          <div id="cf-fields">
+            <div class="cf-row">
+              <div class="cf-group">
+                <label class="cf-label" for="cf-name" data-k="form_name">Name</label>
+                <input class="cf-input" id="cf-name" type="text" placeholder="Kevin Kamau" autocomplete="name" required>
+              </div>
+              <div class="cf-group">
+                <label class="cf-label" for="cf-email" data-k="form_email">Email</label>
+                <input class="cf-input" id="cf-email" type="email" placeholder="you@example.com" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="cf-group">
+              <label class="cf-label" for="cf-subject" data-k="form_subject">Subject</label>
+              <input class="cf-input" id="cf-subject" type="text"
+                data-ph-en="Let's collaborate on something great"
+                data-ph-ar="هيا نتعاون في شيء رائع"
+                placeholder="Let's collaborate on something great" required>
+            </div>
+            <div class="cf-group">
+              <label class="cf-label" for="cf-msg" data-k="form_msg">Message</label>
+              <textarea class="cf-textarea" id="cf-msg"
+                data-ph-en="Tell me about your project, idea, or opportunity..."
+                data-ph-ar="أخبرني عن مشروعك أو فكرتك أو فرصتك..."
+                placeholder="Tell me about your project, idea, or opportunity..." required></textarea>
+            </div>
+            <button class="cf-submit" id="cf-btn" type="button" onclick="cfSubmit()">
+              <span id="cf-btn-txt" data-k="form_send">Send Message</span>
+              <span id="cf-btn-ico">→</span>
+            </button>
+          </div>
+          <div class="cf-success" id="cf-success">
+            <div class="cf-success-icon">✔</div>
+            <div class="cf-success-title" data-k="form_ok_title">Message Sent!</div>
+            <div class="cf-success-msg" data-k="form_ok_msg">Thanks for reaching out. I'll get back to you soon.</div>
+            <button class="cf-again" onclick="cfReset()" data-k="form_again">Send another</button>
+          </div>
+        </div>
+      </div><!-- /form col -->
+
+    </div><!-- /contact-bottom -->
+  </div><!-- /contact-inner -->
+</section>
+
+<footer>
+  <span class="f-copy">© <span id="current-year"></span> Kevin Kamau — All rights reserved</span>
+  <div style="display:flex;align-items:center;gap:.5rem;">
+    <span class="f-copy" data-k="f_built">Built with precision</span>
+    <span class="f-dot"></span>
+  </div>
+</footer>
+
+<script src="script/translations.js"></script>
+<script src="script/ui-core.js"></script>
+<script src="script/loader.js"></script>
+<script src="script/three-setup.js"></script>
+<script src="script/games.js"></script>
+</body>
+</html>
