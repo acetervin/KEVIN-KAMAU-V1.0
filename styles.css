@@ -2806,35 +2806,32 @@ body.lang-ar .footer-meta {
 #pb-blocked.show { display: flex; }
 
 .pb-blocked-inner {
-  max-width: 480px;
-  width: 100%;
-  background: rgba(20, 20, 20, 0.6);
-  border: 1px solid rgba(212, 168, 75, 0.15);
-  border-radius: 16px;
+  max-width: 440px;
+  width: 92%;
+  background: rgba(20, 20, 20, 0.98);
+  border: 1px solid rgba(212, 168, 75, 0.25);
+  border-radius: 12px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 40px rgba(212, 168, 75, 0.02);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
   animation: pb-cyber-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes pb-cyber-pop {
-  from { transform: scale(0.9) translateY(20px); opacity: 0; }
-  to { transform: scale(1) translateY(0); opacity: 1; }
+  display: flex;
+  flex-direction: column;
 }
 
 .pb-blocked-decor {
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 10px;
+  right: 15px;
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
-.pb-blocked-decor span { width: 12px; height: 2px; background: rgba(212, 168, 75, 0.3); }
-.pb-blocked-decor span.d-2 { width: 24px; }
+.pb-blocked-decor span { width: 8px; height: 1px; background: rgba(212, 168, 75, 0.3); }
+.pb-blocked-decor span.d-2 { width: 16px; }
 
 .pb-blocked-content {
-  padding: 3rem 2.5rem 2.5rem;
+  padding: 1.8rem 1.5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -2843,17 +2840,17 @@ body.lang-ar .footer-meta {
 
 .pb-blocked-icon-wrap {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(212, 168, 75, 0.05);
   border: 1px solid rgba(212, 168, 75, 0.2);
   border-radius: 50%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.8rem;
   color: #d4a84b;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
 }
 
 .pb-icon-glow {
@@ -2870,31 +2867,31 @@ body.lang-ar .footer-meta {
 }
 
 .pb-status-tag {
-  font-size: 0.55rem;
+  font-size: 0.45rem;
   font-weight: 700;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   color: #d4a84b;
   background: rgba(212, 168, 75, 0.1);
-  padding: 0.3rem 0.8rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 99px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .pb-main-title {
   font-family: "Syne", sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.4rem;
   letter-spacing: -0.01em;
 }
 
 .pb-main-msg {
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   color: rgba(255,255,255,0.45);
-  line-height: 1.7;
-  max-width: 320px;
-  margin-bottom: 2rem;
+  line-height: 1.5;
+  max-width: 280px;
+  margin-bottom: 1.2rem;
 }
 
 .url-highlight { color: #d4a84b; opacity: 0.8; }
@@ -2906,40 +2903,40 @@ body.lang-ar .footer-meta {
   width: 100%;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.05);
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.2rem;
 }
 
 .pb-data-item {
   background: rgba(10,10,10,0.4);
-  padding: 0.8rem;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
-.pb-data-label { font-size: 0.5rem; color: rgba(255,255,255,0.25); letter-spacing: 0.15em; }
-.pb-data-val { font-size: 0.6rem; color: #fff; font-weight: 700; }
+.pb-data-label { font-size: 0.4rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; }
+.pb-data-val { font-size: 0.5rem; color: #fff; font-weight: 700; }
 
 .pb-blocked-actions {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.5rem;
   width: 100%;
 }
 
 .pb-action-btn {
   font-family: "Space Mono", monospace;
-  font-size: 0.7rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 1rem;
-  border-radius: 8px;
+  letter-spacing: 0.08em;
+  padding: 0.75rem;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
   text-decoration: none;
 }
 
@@ -2951,9 +2948,8 @@ body.lang-ar .footer-meta {
 }
 
 .pb-action-btn.primary:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   background: #fff;
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
 
 .pb-action-btn.secondary {
@@ -2965,12 +2961,11 @@ body.lang-ar .footer-meta {
 .pb-action-btn.secondary:hover {
   background: rgba(255,255,255,0.05);
   color: #fff;
-  border-color: rgba(255,255,255,0.3);
 }
 
 .pb-blocked-bottom {
   background: rgba(0,0,0,0.2);
-  padding: 0.8rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-top: 1px solid rgba(255,255,255,0.03);
   position: relative;
 }
