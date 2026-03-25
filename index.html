@@ -96,8 +96,29 @@
       <span data-k="theme_lbl">Theme</span>
       <div class="theme-dot"></div>
     </div>
+    <button id="nav-toggle" class="nav-mobile-btn" aria-label="Toggle Menu">
+      <span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu">
+  <div class="mm-content">
+    <ul class="mm-links">
+      <li><a href="#home" onclick="closeMobileMenu()">HOME</a></li>
+      <li><a href="#about" data-k="nav_about" onclick="closeMobileMenu()">ABOUT</a></li>
+      <li><a href="#skills" data-k="nav_skills" onclick="closeMobileMenu()">SKILLS</a></li>
+      <li><a href="#projects" data-k="nav_projects" onclick="closeMobileMenu()">PROJECTS</a></li>
+      <li><a href="#experience" data-k="nav_exp" onclick="closeMobileMenu()">EXPERIENCE</a></li>
+      <li><a href="#contact" data-k="nav_contact" onclick="closeMobileMenu()">CONTACT</a></li>
+    </ul>
+    <div class="mm-footer">
+      <span class="pb-pulse-dot"></span>
+      <span>SYSTEM_READY</span>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -111,6 +132,10 @@
   <div class="hero-cta fi">
     <a href="https://github.com/acetervin" target="_blank" class="btn-pri" data-k="cta1">GitHub Profile →</a>
     <a href="#contact" class="btn-sec" data-k="cta2">Get in Touch</a>
+  </div>
+  <div id="hero-easter-egg" class="fi" onclick="openRandomGame()">
+    <i class="fa-solid fa-code-branch"></i>
+    <span data-k="hero_ee">Click for easter egg</span>
   </div>
   <!-- 3D Canvas -->
   <div id="hero3d-wrap">
@@ -405,103 +430,108 @@
 
 <!-- SKILLS -->
 <section class="skills-wrap" id="skills">
-  <div class="skills-inner">
-    <p class="sec-label fi" data-k="sk_lbl">Technical Skills</p>
-    <h2 class="sec-title fi" data-k="sk_title">My Toolkit</h2>
-    <div class="skill-grid">
-      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-html5" aria-hidden="true"></i></span><div class="s-name">HTML5/CSS3</div><div class="s-lvl" data-k="expert">Expert</div><div class="s-bar"><div class="s-fill" style="width:92%"></div></div></div>
-      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-js" aria-hidden="true"></i></span><div class="s-name">JavaScript</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:85%"></div></div></div>
-      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-python" aria-hidden="true"></i></span><div class="s-name">Python</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:82%"></div></div></div>
-
-      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i></span><div class="s-name">Tailwind CSS</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:88%"></div></div></div>
-      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-react" aria-hidden="true"></i></span><div class="s-name">React</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:60%"></div></div></div>
-      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-node-js" aria-hidden="true"></i></span><div class="s-name">Node.js</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:58%"></div></div></div>
-      <div class="s-card fi"><span class="s-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span><div class="s-name">PostgreSQL</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:72%"></div></div></div>
-      <div class="s-card fi"><span class="s-icon"><i class="fa-solid fa-fire" aria-hidden="true"></i></span><div class="s-name">Firebase</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:74%"></div></div></div>
-      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></span><div class="s-name">Git / GitHub</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:85%"></div></div></div>
-      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-aws" aria-hidden="true"></i></span><div class="s-name">Cloud / AWS</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:40%"></div></div></div>
-      <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-figma" aria-hidden="true"></i></span><div class="s-name">Figma</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:70%"></div></div></div>
+  <div class="skills-sticky">
+    <div class="skills-inner">
+      <p class="sec-label fi" data-k="sk_lbl">Technical Skills</p>
+      <h2 class="sec-title fi" data-k="sk_title">My Toolkit</h2>
+      <div class="skill-grid" id="skill-grid">
+        <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-html5" aria-hidden="true"></i></span><div class="s-name">HTML5/CSS3</div><div class="s-lvl" data-k="expert">Expert</div><div class="s-bar"><div class="s-fill" style="width:92%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-js" aria-hidden="true"></i></span><div class="s-name">JavaScript</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:85%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-python" aria-hidden="true"></i></span><div class="s-name">Python</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:82%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i></span><div class="s-name">Tailwind CSS</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:88%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-react" aria-hidden="true"></i></span><div class="s-name">React</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:60%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-node-js" aria-hidden="true"></i></span><div class="s-name">Node.js</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:58%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span><div class="s-name">PostgreSQL</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:72%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-solid fa-fire" aria-hidden="true"></i></span><div class="s-name">Firebase</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:74%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></span><div class="s-name">Git / GitHub</div><div class="s-lvl" data-k="advanced">Advanced</div><div class="s-bar"><div class="s-fill" style="width:85%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-aws" aria-hidden="true"></i></span><div class="s-name">Cloud / AWS</div><div class="s-lvl" data-k="learning">Learning</div><div class="s-bar"><div class="s-fill" style="width:40%"></div></div></div>
+        <div class="s-card fi"><span class="s-icon"><i class="fa-brands fa-figma" aria-hidden="true"></i></span><div class="s-name">Figma</div><div class="s-lvl" data-k="proficient">Proficient</div><div class="s-bar"><div class="s-fill" style="width:70%"></div></div></div>
+      </div>
+      <div class="hscroll-pips" id="skill-pips"></div>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section class="proj-wrap" id="projects">
-  <p class="sec-label fi" data-k="pj_lbl">Selected Work</p>
-  <h2 class="sec-title fi" data-k="pj_title">Projects</h2>
-  <div class="proj-grid">
-    <div class="p-card fi">
-      <div class="p-thumb"><span class="p-num">01</span><div class="p-thumb-inner"><i class="fa-solid fa-utensils" aria-hidden="true"></i></div></div>
-      <div class="p-body">
-        <div class="p-tags"><span class="p-tag">HTML</span><span class="p-tag">CSS</span><span class="p-tag">JS</span><span class="p-tag">PHP</span></div>
-        <h3 class="p-title" data-k="p1t">Allen's Kitchen</h3>
-        <p class="p-desc" data-k="p1d">A smart restaurant ordering platform — the flagship project. Full online food ordering and management system with a clean dashboard UI.</p>
-        <div class="p-actions">
-          <a href="https://github.com/acetervin/Allen-s_Kitchen" target="_blank" data-browser="true" class="p-link p-link-pri" data-k="view_cs">GitHub ↗</a>
-          <a href="project-details.html?p=0" class="p-link p-link-sec" data-k="read_cs">Case Study →</a>
+  <div class="proj-sticky">
+    <p class="sec-label fi" data-k="pj_lbl">Selected Work</p>
+    <h2 class="sec-title fi" data-k="pj_title">Projects</h2>
+    <div class="proj-grid" id="proj-grid">
+      <div class="p-card fi">
+        <div class="p-thumb"><span class="p-num">01</span><div class="p-thumb-inner"><i class="fa-solid fa-utensils" aria-hidden="true"></i></div></div>
+        <div class="p-body">
+          <div class="p-tags"><span class="p-tag">HTML</span><span class="p-tag">CSS</span><span class="p-tag">JS</span><span class="p-tag">PHP</span></div>
+          <h3 class="p-title" data-k="p1t">Allen's Kitchen</h3>
+          <p class="p-desc" data-k="p1d">A smart restaurant ordering platform — the flagship project. Full online food ordering and management system with a clean dashboard UI.</p>
+          <div class="p-actions">
+            <a href="https://github.com/acetervin/Allen-s_Kitchen" target="_blank" data-browser="true" class="p-link p-link-pri" data-k="view_cs">GitHub ↗</a>
+            <a href="project-details.html?p=0" class="p-link p-link-sec" data-k="read_cs">Case Study →</a>
+          </div>
+        </div>
+      </div>
+      <div class="p-card fi">
+        <div class="p-thumb"><span class="p-num">02</span><div class="p-thumb-inner"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div></div>
+        <div class="p-body">
+          <div class="p-tags"><span class="p-tag">TypeScript</span><span class="p-tag">React</span></div>
+          <h3 class="p-title" data-k="p2t">Admin Dashboard</h3>
+          <p class="p-desc" data-k="p2d">A fully-featured admin dashboard built with TypeScript, featuring data tables, analytics views, and a clean management interface.</p>
+          <div class="p-actions">
+            <a href="https://github.com/acetervin/Admin-dashboard" target="_blank" data-browser="true" class="p-link p-link-pri" data-k="view_cs">GitHub ↗</a>
+            <a href="project-details.html?p=1" class="p-link p-link-sec" data-k="read_cs">Case Study →</a>
+          </div>
+        </div>
+      </div>
+      <div class="p-card fi">
+        <div class="p-thumb"><span class="p-num">03</span><div class="p-thumb-inner"><i class="fa-solid fa-robot" aria-hidden="true"></i></div></div>
+        <div class="p-body">
+          <div class="p-tags"><span class="p-tag">Python</span><span class="p-tag">AI</span><span class="p-tag">Automation</span></div>
+          <h3 class="p-title" data-k="p3t">Smart Automation</h3>
+          <p class="p-desc" data-k="p3d">Exploring AI-powered automations and intelligent systems — from data structures to cloud-native solutions.</p>
+          <div class="p-actions">
+            <a href="https://github.com/acetervin" target="_blank" data-browser="true" class="p-link p-link-pri" data-k="view_cs">GitHub ↗</a>
+            <a href="project-details.html?p=2" class="p-link p-link-sec" data-k="read_cs">Case Study →</a>
+          </div>
+        </div>
+      </div>
+      <div class="p-card fi">
+        <div class="p-thumb"><span class="p-num">04</span><div class="p-thumb-inner"><i class="fa-solid fa-dove" aria-hidden="true"></i></div></div>
+        <div class="p-body">
+          <div class="p-tags"><span class="p-tag">React</span><span class="p-tag">Tailwind</span><span class="p-tag">JS</span></div>
+          <h3 class="p-title">Family Peace Association</h3>
+          <p class="p-desc">Clean, responsive NGO website built with React + Tailwind. Covers programmes, events, and impact stories for a Nairobi-based peace-building organisation.</p>
+          <div class="p-actions">
+            <a href="https://familypeaceassociationkenya.org/" target="_blank" data-browser="true" class="p-link p-link-pri">Live Site ↗</a>
+            <a href="project-details.html?p=3" class="p-link p-link-sec">Case Study →</a>
+          </div>
+        </div>
+      </div>
+      <div class="p-card fi">
+        <div class="p-thumb"><span class="p-num">05</span><div class="p-thumb-inner"><i class="fa-solid fa-couch" aria-hidden="true"></i></div></div>
+        <div class="p-body">
+          <div class="p-tags"><span class="p-tag">Web Design</span><span class="p-tag">HTML</span><span class="p-tag">CSS</span></div>
+          <h3 class="p-title">First Interior Designs</h3>
+          <p class="p-desc">Premium portfolio website for a Nairobi interior design studio. Mobile-first, visually editorial, with portfolio gallery and contact integration.</p>
+          <div class="p-actions">
+            <a href="https://www.firstinteriordesigns.co.ke/" target="_blank" data-browser="true" class="p-link p-link-pri">Live Site ↗</a>
+            <a href="project-details.html?p=4" class="p-link p-link-sec">Case Study →</a>
+          </div>
+        </div>
+      </div>
+      <div class="p-card fi">
+        <div class="p-thumb"><span class="p-num">06</span><div class="p-thumb-inner"><i class="fa-solid fa-building" aria-hidden="true"></i></div></div>
+        <div class="p-body">
+          <div class="p-tags"><span class="p-tag">Web Dev</span><span class="p-tag">Maintenance</span><span class="p-tag">CMS</span></div>
+          <h3 class="p-title">Tetezi Properties</h3>
+          <p class="p-desc">Web development and ongoing maintenance for a Kilimani-based real estate developer. Property listings, UI components, and content management.</p>
+          <div class="p-actions">
+            <a href="https://teteziproperties.co.ke/" target="_blank" data-browser="true" class="p-link p-link-pri">Live Site ↗</a>
+            <a href="project-details.html?p=5" class="p-link p-link-sec">Case Study →</a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="p-card fi">
-      <div class="p-thumb"><span class="p-num">02</span><div class="p-thumb-inner"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div></div>
-      <div class="p-body">
-        <div class="p-tags"><span class="p-tag">TypeScript</span><span class="p-tag">React</span></div>
-        <h3 class="p-title" data-k="p2t">Admin Dashboard</h3>
-        <p class="p-desc" data-k="p2d">A fully-featured admin dashboard built with TypeScript, featuring data tables, analytics views, and a clean management interface.</p>
-        <div class="p-actions">
-          <a href="https://github.com/acetervin/Admin-dashboard" target="_blank" data-browser="true" class="p-link p-link-pri" data-k="view_cs">GitHub ↗</a>
-          <a href="project-details.html?p=1" class="p-link p-link-sec" data-k="read_cs">Case Study →</a>
-        </div>
-      </div>
-    </div>
-    <div class="p-card fi">
-      <div class="p-thumb"><span class="p-num">03</span><div class="p-thumb-inner"><i class="fa-solid fa-robot" aria-hidden="true"></i></div></div>
-      <div class="p-body">
-        <div class="p-tags"><span class="p-tag">Python</span><span class="p-tag">AI</span><span class="p-tag">Automation</span></div>
-        <h3 class="p-title" data-k="p3t">Smart Automation</h3>
-        <p class="p-desc" data-k="p3d">Exploring AI-powered automations and intelligent systems — from data structures to cloud-native solutions.</p>
-        <div class="p-actions">
-          <a href="https://github.com/acetervin" target="_blank" data-browser="true" class="p-link p-link-pri" data-k="view_cs">GitHub ↗</a>
-          <a href="project-details.html?p=2" class="p-link p-link-sec" data-k="read_cs">Case Study →</a>
-        </div>
-      </div>
-    </div>
-    <div class="p-card fi">
-      <div class="p-thumb"><span class="p-num">04</span><div class="p-thumb-inner"><i class="fa-solid fa-dove" aria-hidden="true"></i></div></div>
-      <div class="p-body">
-        <div class="p-tags"><span class="p-tag">React</span><span class="p-tag">Tailwind</span><span class="p-tag">JS</span></div>
-        <h3 class="p-title">Family Peace Association</h3>
-        <p class="p-desc">Clean, responsive NGO website built with React + Tailwind. Covers programmes, events, and impact stories for a Nairobi-based peace-building organisation.</p>
-        <div class="p-actions">
-          <a href="https://familypeaceassociationkenya.org/" target="_blank" data-browser="true" class="p-link p-link-pri">Live Site ↗</a>
-          <a href="project-details.html?p=3" class="p-link p-link-sec">Case Study →</a>
-        </div>
-      </div>
-    </div>
-    <div class="p-card fi">
-      <div class="p-thumb"><span class="p-num">05</span><div class="p-thumb-inner"><i class="fa-solid fa-couch" aria-hidden="true"></i></div></div>
-      <div class="p-body">
-        <div class="p-tags"><span class="p-tag">Web Design</span><span class="p-tag">HTML</span><span class="p-tag">CSS</span></div>
-        <h3 class="p-title">First Interior Designs</h3>
-        <p class="p-desc">Premium portfolio website for a Nairobi interior design studio. Mobile-first, visually editorial, with portfolio gallery and contact integration.</p>
-        <div class="p-actions">
-          <a href="https://www.firstinteriordesigns.co.ke/" target="_blank" data-browser="true" class="p-link p-link-pri">Live Site ↗</a>
-          <a href="project-details.html?p=4" class="p-link p-link-sec">Case Study →</a>
-        </div>
-      </div>
-    </div>
-    <div class="p-card fi">
-      <div class="p-thumb"><span class="p-num">06</span><div class="p-thumb-inner"><i class="fa-solid fa-building" aria-hidden="true"></i></div></div>
-      <div class="p-body">
-        <div class="p-tags"><span class="p-tag">Web Dev</span><span class="p-tag">Maintenance</span><span class="p-tag">CMS</span></div>
-        <h3 class="p-title">Tetezi Properties</h3>
-        <p class="p-desc">Web development and ongoing maintenance for a Kilimani-based real estate developer. Property listings, UI components, and content management.</p>
-        <div class="p-actions">
-          <a href="https://teteziproperties.co.ke/" target="_blank" data-browser="true" class="p-link p-link-pri">Live Site ↗</a>
-          <a href="project-details.html?p=5" class="p-link p-link-sec">Case Study →</a>
-        </div>
-      </div>
-    </div>
+    <div class="hscroll-pips" id="proj-pips"></div>
   </div>
 </section>
 <div class="divider"></div>

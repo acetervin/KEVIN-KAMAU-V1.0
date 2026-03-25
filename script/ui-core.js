@@ -58,6 +58,175 @@ if(_prog){
   },{passive:true});
 }
 
+// ── SCROLL-HIJACK HORIZONTAL SECTIONS (mobile only) ──────────────────────
+// Each section (.skills-wrap / .proj-wrap) gets extra height = its scrollWidth.
+// A sticky inner panel stays fixed while that budget is consumed, converting
+// vertical scroll 1-to-1 into horizontal scrollLeft on the card track.
+// Works in both directions (scroll up = scroll back left).
+(function () {
+  if (!('ontouchstart' in window) && window.innerWidth > 860) return;
+  if (window.innerWidth > 860) return;
+
+  // ── CONFIG ────────────────────────────────────────────
+  var SECTIONS = [
+    {
+      wrap:   document.querySelector('.skills-wrap'),
+      sticky: document.querySelector('.skills-sticky'),
+      grid:   document.getElementById('skill-grid'),
+      pips:   document.getElementById('skill-pips'),
+      skew:   -6
+    },
+    {
+      wrap:   document.querySelector('.proj-wrap'),
+      sticky: document.querySelector('.proj-sticky'),
+      grid:   document.getElementById('proj-grid'),
+      pips:   document.getElementById('proj-pips'),
+      skew:   -5
+    }
+  ].filter(function (s) { return s.wrap && s.grid; });
+
+  if (!SECTIONS.length) return;
+
+  // ── SETUP ─────────────────────────────────────────────
+  // Give each section a height equal to viewport + scrollable width,
+  // so the sticky panel has exactly enough vertical budget.
+  function setup() {
+    SECTIONS.forEach(function (s) {
+      var scrollable = s.grid.scrollWidth - s.grid.clientWidth;
+      // section height = one viewport (so sticky panel is visible) + scrollable budget
+      s.wrap.style.height = (window.innerHeight + scrollable) + 'px';
+      s._scrollable = scrollable;
+
+      // Build pips once
+      if (s.pips && !s.pips._built) {
+        s.pips._built = true;
+        var count = s.grid.children.length;
+        s.pips.innerHTML = '';
+        for (var i = 0; i < count; i++) {
+          var pip = document.createElement('span');
+          pip.className = 'hscroll-pip';
+          s.pips.appendChild(pip);
+        }
+      }
+    });
+  }
+
+  // ── TICK ──────────────────────────────────────────────
+  function tick() {
+    var sy = window.scrollY;
+
+    SECTIONS.forEach(function (s) {
+      var wTop  = s.wrap.getBoundingClientRect().top + sy; // section top in doc
+      var scrollable = s._scrollable || 0;
+
+      // How far into the section's vertical budget the user has scrolled
+      // (0 at section entry, scrollable at section exit)
+      var raw = sy - wTop;
+      var clamped = Math.max(0, Math.min(scrollable, raw));
+
+      // Drive scrollLeft — this is what moves the cards
+      s.grid.scrollLeft = clamped;
+
+      // Also update the skew transform (keeps slant, no extra drift)
+      s.grid.style.transform = 'skewX(' + s.skew + 'deg)';
+
+      // Update pips
+      if (s.pips) {
+        var pips = s.pips.querySelectorAll('.hscroll-pip');
+        var count = pips.length;
+        if (count) {
+          var prog = scrollable > 0 ? clamped / scrollable : 0;
+          // Which pip is "active" based on progress
+          var activeIdx = Math.min(count - 1, Math.floor(prog * count));
+          pips.forEach(function (pip, i) {
+            pip.classList.toggle('active', i === activeIdx);
+          });
+        }
+      }
+    });
+  }
+
+  // ── SCROLL LOCK ───────────────────────────────────────
+  // Prevent the page from scrolling past a section until its
+  // horizontal track is fully consumed (in both directions).
+  var _ticking = false;
+
+  function onScroll() {
+    if (!_ticking) {
+      _ticking = true;
+      requestAnimationFrame(function () {
+        tick();
+        _ticking = false;
+      });
+    }
+  }
+
+  // Touch-based scroll interception — convert vertical swipe to scrollLeft
+  // while inside a section's scroll budget, blocking native vertical scroll.
+  var _touch = { y: 0, locked: false, section: null };
+
+  function findActiveSection() {
+    var sy = window.scrollY;
+    for (var i = 0; i < SECTIONS.length; i++) {
+      var s = SECTIONS[i];
+      var wTop = s.wrap.getBoundingClientRect().top + sy;
+      var raw  = sy - wTop;
+      // Inside the budget zone
+      if (raw >= 0 && raw <= (s._scrollable || 0)) return s;
+    }
+    return null;
+  }
+
+  document.addEventListener('touchstart', function (e) {
+    _touch.y = e.touches[0].clientY;
+    _touch.section = findActiveSection();
+    _touch.locked = false;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function (e) {
+    if (!_touch.section) return;
+    var s   = _touch.section;
+    var dy  = _touch.y - e.touches[0].clientY; // positive = swipe up = scroll down
+    var sy  = window.scrollY;
+    var wTop = s.wrap.getBoundingClientRect().top + sy;
+    var raw  = sy - wTop;
+    var scrollable = s._scrollable || 0;
+
+    // Would the swipe take us inside the horizontal budget?
+    var wouldBe = raw + dy;
+    if (wouldBe >= 0 && wouldBe <= scrollable) {
+      // Consume the swipe as horizontal scroll — block vertical
+      e.preventDefault();
+      window.scrollTo({ top: wTop + wouldBe, behavior: 'instant' });
+      _touch.y = e.touches[0].clientY;
+    }
+    // else: let native scroll handle it (we've hit start or end of track)
+  }, { passive: false });
+
+  // ── INIT ──────────────────────────────────────────────
+  window.addEventListener('load', function () {
+    setup();
+    tick();
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Re-setup on orientation change / resize
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 860) {
+      // Desktop — undo everything
+      SECTIONS.forEach(function (s) {
+        s.wrap.style.height = '';
+        s.grid.scrollLeft = 0;
+        s.grid.style.transform = '';
+      });
+    } else {
+      setup();
+      tick();
+    }
+  }, { passive: true });
+})();
+
 // Intersection observer for fade-in animations — only on pages with static .fi elements
 // (project-details.html renders .fi dynamically, so it uses its own observer)
 if(!document.querySelector('.pd-selector')){
@@ -486,5 +655,49 @@ function cfReset(){
       iframe.src = 'about:blank';
     }
   });
+
+  // Mobile Menu Logic
+  var navToggle = document.getElementById('nav-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+
+  function animateMenuLinks(open) {
+    var links = mobileMenu ? mobileMenu.querySelectorAll('.mm-links li') : [];
+    links.forEach(function(li, i) {
+      li.style.transition = 'none';
+      li.style.opacity = open ? '0' : '1';
+      li.style.transform = open ? 'translateY(18px)' : 'translateY(0)';
+      if (open) {
+        setTimeout(function() {
+          li.style.transition = 'opacity 0.4s ease ' + (0.1 + i * 0.055) + 's, transform 0.4s ease ' + (0.1 + i * 0.055) + 's';
+          li.style.opacity = '1';
+          li.style.transform = 'translateY(0)';
+        }, 10);
+      }
+    });
+  }
+
+  if (navToggle && mobileMenu) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      navToggle.classList.toggle('active', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+      animateMenuLinks(isOpen);
+    });
+  }
+
+  window.closeMobileMenu = function () {
+    if (mobileMenu) {
+      mobileMenu.classList.remove('open');
+      if (navToggle) navToggle.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  window.openRandomGame = function () {
+    if (typeof GAMES === 'undefined') return;
+    var keys = Object.keys(GAMES);
+    var randomSkill = keys[Math.floor(Math.random() * keys.length)];
+    if (typeof openGame === 'function') openGame(randomSkill);
+  };
 
 })();
