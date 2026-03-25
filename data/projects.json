@@ -40,9 +40,9 @@
     "challenge": "The trickiest part was syncing order status in real time between the customer view and kitchen display without WebSockets — solved using lightweight polling with PHP endpoints and optimistic UI updates on the frontend.",
     "learned": "This project pushed me deep into database normalisation, session management, and building a full authentication flow from scratch. It also taught me how to structure a multi-role application where the same backend serves completely different UI needs.",
     "gallery": [
-      { "label": "menu.html", "caption": "Customer Menu & Ordering Interface", "wide": true },
-      { "label": "admin/orders.html", "caption": "Admin Dashboard — Orders", "wide": false },
-      { "label": "kitchen.html", "caption": "Kitchen Display System", "wide": false }
+      { "label": "menu.html", "caption": "Customer Menu & Ordering Interface", "wide": true, "img": "assets/screenshots/project-0/menu.png" },
+      { "label": "admin/orders.html", "caption": "Admin Dashboard — Orders", "wide": false, "img": "assets/screenshots/project-0/admin-orders.png" },
+      { "label": "kitchen.html", "caption": "Kitchen Display System", "wide": false, "img": "assets/screenshots/project-0/kitchen.png" }
     ]
   },
   {
@@ -84,9 +84,9 @@
     "challenge": "Learning TypeScript's type system while building a real project simultaneously was a steep curve. Generic types for reusable table components and correctly typing API responses took multiple iterations to get right.",
     "learned": "TypeScript forced me to think about data shapes before writing logic — a discipline that made the codebase significantly easier to debug. I also got solid practice in component architecture and prop drilling vs context patterns in React.",
     "gallery": [
-      { "label": "dashboard/index.tsx", "caption": "Dashboard — Analytics Overview", "wide": true },
-      { "label": "pages/users.tsx", "caption": "Users Table View", "wide": false },
-      { "label": "pages/settings.tsx", "caption": "Settings Panel", "wide": false }
+      { "label": "dashboard/index.tsx", "caption": "Dashboard — Analytics Overview", "wide": true, "img": "assets/screenshots/project-1/dashboard.png" },
+      { "label": "pages/users.tsx", "caption": "Users Table View", "wide": false, "img": "assets/screenshots/project-1/users.png" },
+      { "label": "pages/settings.tsx", "caption": "Settings Panel", "wide": false, "img": "assets/screenshots/project-1/settings.png" }
     ]
   },
   {
@@ -127,9 +127,9 @@
     "challenge": "Currently exploring cloud deployment — taking scripts that run locally and making them run reliably on cloud infrastructure. Also diving into data structures more formally as part of university coursework.",
     "learned": "Python's ecosystem is vast — this project has been my playground for exploring it. Working with real data (messy, incomplete, inconsistent) taught me more about defensive programming than any tutorial ever could.",
     "gallery": [
-      { "label": "scripts/", "caption": "Automation Scripts Collection", "wide": true },
-      { "label": "data/", "caption": "Data Processing Pipeline", "wide": false },
-      { "label": "cloud/", "caption": "Cloud Functions", "wide": false }
+      { "label": "scripts/", "caption": "Automation Scripts Collection", "wide": true, "img": "assets/screenshots/project-2/scripts.png" },
+      { "label": "data/", "caption": "Data Processing Pipeline", "wide": false, "img": "assets/screenshots/project-2/data.png" },
+      { "label": "cloud/", "caption": "Cloud Functions", "wide": false, "img": "assets/screenshots/project-2/cloud.png" }
     ]
   },
   {
@@ -171,9 +171,9 @@
     "challenge": "The main challenge was translating the organisation's brand identity into a digital experience that felt both professional and warm — suitable for community members and international donors alike.",
     "learned": "Working with a real client organisation taught me the importance of content-first design. The layout had to flex around their actual content, not the other way around.",
     "gallery": [
-      { "label": "familypeaceassociationkenya.org", "caption": "Homepage — Live Site", "wide": true },
-      { "label": "Programmes Section", "caption": "Programmes & Events", "wide": false },
-      { "label": "Contact Page", "caption": "Contact & Partnerships", "wide": false }
+      { "label": "familypeaceassociationkenya.org", "caption": "Homepage — Live Site", "wide": true, "img": "assets/screenshots/project-3/Family Peace Kenya.png" },
+      { "label": "Programmes Section", "caption": "Programmes & Events", "wide": false, "img": "assets/screenshots/project-3/Family Peace Kenya Events.png" },
+      { "label": "Contact Page", "caption": "Contact & Partnerships", "wide": false, "img": "assets/screenshots/project-3/Family Peace Kenya Blog.png" }
     ]
   },
   {
@@ -215,9 +215,9 @@
     "challenge": "Interior design is a highly visual field — the website itself had to look like a premium design product. Balancing aesthetics with performance (large images vs. load speed) was the core tension.",
     "learned": "This project sharpened my eye for visual design details — spacing, typography hierarchy, and image presentation matter enormously when the client's work is the product being sold.",
     "gallery": [
-      { "label": "firstinteriordesigns.co.ke", "caption": "Homepage — Live Site", "wide": true },
-      { "label": "Portfolio Gallery", "caption": "Project Portfolio", "wide": false },
-      { "label": "Contact Page", "caption": "Contact & Enquiry", "wide": false }
+      { "label": "firstinteriordesigns.co.ke", "caption": "Homepage — Live Site", "wide": true, "img": "assets/screenshots/project-4/First Interiors Designs.png" },
+      { "label": "Portfolio Gallery", "caption": "Project Portfolio", "wide": false, "img": "assets/screenshots/project-4/First Interiors Designs Works.png" },
+      { "label": "Contact Page", "caption": "Contact & Enquiry", "wide": false, "img": "assets/screenshots/project-4/First Interiors Designs Projects Details.png" }
     ]
   },
   {
@@ -259,9 +259,9 @@
     "challenge": "Real estate sites require frequent content updates — property listings change often. Building a maintainable content structure that the client could update with minimal technical knowledge was the key challenge.",
     "learned": "Maintenance work is a different skill from greenfield development. Reading and improving someone else's codebase (or your own from months earlier) reinforces the value of clean, well-commented code.",
     "gallery": [
-      { "label": "teteziproperties.co.ke", "caption": "Homepage — Live Site", "wide": true },
-      { "label": "Property Listings", "caption": "Listings & Filters", "wide": false },
-      { "label": "Property Detail", "caption": "Property Detail View", "wide": false }
+      { "label": "teteziproperties.co.ke", "caption": "Homepage — Live Site", "wide": true, "img": "assets/screenshots/project-5/Tetezi Properties Kenya.png" },
+      { "label": "Property Listings", "caption": "Listings & Filters", "wide": false, "img": "assets/screenshots/project-5/Tetezi Properties Kenya Project.png" },
+      { "label": "Property Detail", "caption": "Property Detail View", "wide": false, "img": "assets/screenshots/project-5/Tetezi Properties Kenya Project Details.png" }
     ]
   }
 ]

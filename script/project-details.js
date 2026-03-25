@@ -12,8 +12,12 @@ function statusHTML(p) {
 
 function galleryHTML(gallery, projectIcon) {
   return gallery.map(function(g) {
-    return '<div class="pd-gallery-item' + (g.wide ? ' wide' : '') + '" onclick="openLightbox(\'' + g.caption.replace(/'/g, "\\'") + '\')">' +
-      '<div class="pd-gallery-placeholder"><i class="' + (g.icon || projectIcon) + '" aria-hidden="true"></i><div>' + g.caption + '</div></div>' +
+    var imgContent = g.img
+      ? '<img src="' + g.img + '" alt="' + g.caption + '" loading="lazy" />'
+      : '<div class="pd-gallery-placeholder"><i class="' + (g.icon || projectIcon) + '" aria-hidden="true"></i><div>' + g.caption + '</div></div>';
+
+    return '<div class="pd-gallery-item' + (g.wide ? ' wide' : '') + '" onclick="openLightbox(\'' + g.caption.replace(/'/g, "\\'") + '\', \'' + (g.img || '').replace(/'/g, "\\'") + '\')">' +
+      imgContent +
       '<span class="pd-gallery-label">' + g.label + '</span>' +
     '</div>';
   }).join('');
@@ -156,10 +160,23 @@ function observePanel() {
 }
 
 // ── LIGHTBOX ─────────────────────────────────────────────────────────────────
-function openLightbox(title) {
+function openLightbox(title, imgSrc) {
   var lb = document.getElementById('lightbox');
   var lt = document.getElementById('lightbox-title');
+  var li = document.getElementById('lightbox-img');
+  var lp = document.getElementById('lightbox-placeholder');
+
   if (lt) lt.textContent = title;
+
+  if (imgSrc && li) {
+    li.src = imgSrc;
+    li.style.display = 'block';
+    if (lp) lp.style.display = 'none';
+  } else {
+    if (li) li.style.display = 'none';
+    if (lp) lp.style.display = 'flex';
+  }
+
   if (lb) { lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); }
   document.body.style.overflow = 'hidden';
 }

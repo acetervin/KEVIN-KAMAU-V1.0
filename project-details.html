@@ -64,9 +64,12 @@
 <div id="lightbox" aria-hidden="true">
   <div id="lightbox-content">
     <div class="lightbox-inner">
-      <div class="lightbox-icon"><i class="fa-solid fa-image" aria-hidden="true"></i></div>
-      <div id="lightbox-title" class="lightbox-title"></div>
-      <div class="lightbox-hint">Add your screenshot here by replacing<br>this placeholder with an &lt;img&gt; tag</div>
+      <img id="lightbox-img" class="lightbox-img" src="" alt="" loading="lazy" style="display:none;" />
+      <div id="lightbox-placeholder" class="lightbox-placeholder">
+        <div class="lightbox-icon"><i class="fa-solid fa-image" aria-hidden="true"></i></div>
+        <div id="lightbox-title" class="lightbox-title"></div>
+        <div class="lightbox-hint">Add your screenshot here by replacing<br>this placeholder with an &lt;img&gt; tag</div>
+      </div>
     </div>
     <button id="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark" aria-hidden="true"></i> <span data-k="pd_lightbox_close">Close</span></button>
   </div>
