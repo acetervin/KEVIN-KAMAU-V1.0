@@ -990,6 +990,31 @@ body.lang-ar .hero-badge::before {
 }
 
 /* ── PROJECT DETAILS PAGE ───────────────────────────────────────────────────── */
+.pd-back-btn-wrapper {
+  max-width: 1300px;
+  margin: 1.2rem auto 1rem;
+  padding: 0 3rem;
+}
+
+.pd-back-btn {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s, transform 0.2s;
+  opacity: 0.7;
+}
+
+.pd-back-btn:hover {
+  opacity: 1;
+  transform: translateX(-4px);
+}
+
 .pd-hero {
   min-height: 55vh;
   display: flex;
@@ -1118,6 +1143,9 @@ body.lang-ar .hero-badge::before {
     grid-template-columns: 1fr;
     gap: 3rem;
     padding: 3rem 1.5rem;
+  }
+  .pd-back-btn-wrapper {
+    padding: 0 1.5rem;
   }
   .pd-hero {
     padding: 6rem 1.5rem 2.5rem;
@@ -1540,6 +1568,18 @@ body.lang-ar .hero-badge::before {
   gap: 0;
   transition: background var(--speed), border-color var(--speed);
   overflow-x: auto;
+  cursor: grab;
+  user-select: none;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but keep scrolling functional */
+.pd-selector::-webkit-scrollbar {
+  display: none;
+}
+.pd-selector {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .pd-tab {

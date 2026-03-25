@@ -183,6 +183,37 @@ fetch('data/projects.json')
     renderAllPanels();
     setLang('en');
 
+    // Setup draggable tabs
+    var sel = document.querySelector('.pd-selector');
+    if (sel) {
+      var isDown = false, startX = 0, scrollLeft = 0;
+
+      sel.addEventListener('mousedown', function(e) {
+        isDown = true;
+        startX = e.pageX - sel.offsetLeft;
+        scrollLeft = sel.scrollLeft;
+        sel.style.cursor = 'grabbing';
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        var x = e.pageX - sel.offsetLeft;
+        var walk = (x - startX) * 1;
+        sel.scrollLeft = scrollLeft - walk;
+      });
+
+      document.addEventListener('mouseup', function() {
+        isDown = false;
+        sel.style.cursor = 'grab';
+      });
+
+      sel.addEventListener('mouseleave', function() {
+        isDown = false;
+        sel.style.cursor = 'grab';
+      });
+    }
+
     // Deep-link to a specific project via ?p=N
     var params = new URLSearchParams(window.location.search);
     var p = parseInt(params.get('p') || '0');
