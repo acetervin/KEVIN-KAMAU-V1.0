@@ -22,8 +22,30 @@
       <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
       <button id="btn-ar" onclick="setLang('ar')">عر</button>
     </div>
+    <div class="theme-pill" onclick="toggleTheme()">
+      <span data-k="theme_lbl">Theme</span>
+      <div class="theme-dot"></div>
+    </div>
+    <button id="nav-toggle" class="nav-mobile-btn" aria-label="Toggle Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open'); document.getElementById('nav-toggle').classList.toggle('active');">
+      <span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu">
+  <div class="mm-content">
+    <button class="mm-close-btn" onclick="closeMobileMenu()" aria-label="Close Menu">✕</button>
+    <ul class="mm-links">
+      <li><a href="index.html" onclick="closeMobileMenu()">HOME</a></li>
+      <li><a href="index.html#projects" data-k="nav_projects" onclick="closeMobileMenu()">PROJECTS</a></li>
+    </ul>
+    <div class="mm-footer">
+      <span class="pb-pulse-dot"></span>
+      <span>SYSTEM_READY</span>
+    </div>
+  </div>
+</div>
 
 <!-- PROJECT TABS — populated by project-details.js from data/projects.json -->
 <div class="pd-selector"></div>
