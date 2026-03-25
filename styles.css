@@ -2559,6 +2559,29 @@ body.lang-ar .footer-meta {
   width: 100%;
 }
 
+.mm-close-btn {
+  position: absolute;
+  top: 0.8rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.mm-close-btn:hover {
+  background: var(--adim);
+  border-color: var(--accent);
+}
+
 .mm-links {
   list-style: none;
   display: flex;
@@ -2661,19 +2684,23 @@ body.lang-ar .footer-meta {
   .theme-pill span { display: none; }
   .theme-pill { padding: 0.28rem; border-radius: 50%; }
 
+  /* Smaller icons on mobile for better accessibility */
+  .theme-dot { width: 16px; height: 16px; }
+  .lang-sw button { padding: 0.25rem 0.45rem; font-size: 0.55rem; }
+
   .controls { gap: 0.5rem; }
 
   /* ── HERO ── */
   .hero {
     padding: 6.5rem 1.5rem 3.5rem;
-    text-align: center;
-    align-items: center;
+    text-align: left;
+    align-items: flex-start;
     min-height: 100svh; /* use small viewport height on mobile */
   }
 
   .hero-eyebrow {
     font-size: 0.65rem;
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: 1rem;
   }
 
@@ -2687,12 +2714,12 @@ body.lang-ar .footer-meta {
   .hero-desc {
     font-size: 0.92rem;
     line-height: 1.75;
-    margin: 0 auto 2rem;
+    margin: 0 0 2rem;
     max-width: 340px;
   }
 
   .hero-cta {
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.75rem;
   }
 
@@ -2702,7 +2729,7 @@ body.lang-ar .footer-meta {
   }
 
   #hero-easter-egg {
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     margin-top: 1.5rem;
   }
@@ -2712,7 +2739,7 @@ body.lang-ar .footer-meta {
   .hero-badge {
     position: static;
     margin-top: 2.5rem;
-    justify-content: center;
+    justify-content: flex-start;
     font-size: 0.6rem;
   }
 
@@ -2966,7 +2993,7 @@ body.lang-ar .footer-meta {
 
   .hero-desc { font-size: 0.88rem; max-width: 100%; }
 
-  .btn-pri, .btn-sec { width: 100%; justify-content: center; }
+  .btn-pri, .btn-sec { width: 100%; }
 
   .hero-cta { flex-direction: column; }
 
