@@ -26,7 +26,7 @@
       <span data-k="theme_lbl">Theme</span>
       <div class="theme-dot"></div>
     </div>
-    <button id="nav-toggle" class="nav-mobile-btn" aria-label="Toggle Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open'); document.getElementById('nav-toggle').classList.toggle('active');">
+    <button id="nav-toggle" class="nav-mobile-btn" aria-label="Toggle Menu">
       <span></span><span></span>
     </button>
   </div>
@@ -38,6 +38,11 @@
     <button class="mm-close-btn" onclick="closeMobileMenu()" aria-label="Close Menu">✕</button>
     <ul class="mm-links">
       <li><a href="index.html" onclick="closeMobileMenu()">HOME</a></li>
+      <li><a href="index.html#about" data-k="nav_about" onclick="closeMobileMenu()">ABOUT</a></li>
+      <li><a href="index.html#skills" data-k="nav_skills" onclick="closeMobileMenu()">SKILLS</a></li>
+      <li><a href="index.html#projects" data-k="nav_projects" onclick="closeMobileMenu()">PROJECTS</a></li>
+      <li><a href="index.html#experience" data-k="nav_exp" onclick="closeMobileMenu()">EXPERIENCE</a></li>
+      <li><a href="index.html#contact" data-k="nav_contact" onclick="closeMobileMenu()">CONTACT</a></li>
     </ul>
     <div class="mm-footer">
       <span class="pb-pulse-dot"></span>
@@ -78,6 +83,7 @@
 
 <script src="script/translations.js"></script>
 <script src="script/ui-core.js"></script>
+<script src="script/mobile-menu.js"></script>
 <script src="script/project-details.js"></script>
 
 </body>

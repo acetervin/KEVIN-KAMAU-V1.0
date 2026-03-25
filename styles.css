@@ -2601,8 +2601,8 @@ body.lang-ar .footer-meta {
 }
 
 .mm-close-btn {
-  position: absolute;
-  top: 0.8rem;
+  position: fixed;
+  top: 1rem;
   right: 1.5rem;
   width: 40px;
   height: 40px;
@@ -2616,6 +2616,7 @@ body.lang-ar .footer-meta {
   align-items: center;
   justify-content: center;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
+  z-index: 10001;
 }
 
 .mm-close-btn:hover {

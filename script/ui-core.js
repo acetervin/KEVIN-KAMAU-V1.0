@@ -656,43 +656,6 @@ function cfReset(){
     }
   });
 
-  // Mobile Menu Logic
-  var navToggle = document.getElementById('nav-toggle');
-  var mobileMenu = document.getElementById('mobile-menu');
-
-  function animateMenuLinks(open) {
-    var links = mobileMenu ? mobileMenu.querySelectorAll('.mm-links li') : [];
-    links.forEach(function(li, i) {
-      li.style.transition = 'none';
-      li.style.opacity = open ? '0' : '1';
-      li.style.transform = open ? 'translateY(18px)' : 'translateY(0)';
-      if (open) {
-        setTimeout(function() {
-          li.style.transition = 'opacity 0.4s ease ' + (0.1 + i * 0.055) + 's, transform 0.4s ease ' + (0.1 + i * 0.055) + 's';
-          li.style.opacity = '1';
-          li.style.transform = 'translateY(0)';
-        }, 10);
-      }
-    });
-  }
-
-  if (navToggle && mobileMenu) {
-    navToggle.addEventListener('click', function () {
-      var isOpen = mobileMenu.classList.toggle('open');
-      navToggle.classList.toggle('active', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-      animateMenuLinks(isOpen);
-    });
-  }
-
-  window.closeMobileMenu = function () {
-    if (mobileMenu) {
-      mobileMenu.classList.remove('open');
-      if (navToggle) navToggle.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  };
-
   window.openRandomGame = function () {
     if (typeof GAMES === 'undefined') return;
     var keys = Object.keys(GAMES);
