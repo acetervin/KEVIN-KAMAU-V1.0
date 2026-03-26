@@ -53,6 +53,12 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -62,6 +68,12 @@ body {
   transition: background var(--speed), color var(--speed);
   overflow-x: hidden;
   line-height: 1.6;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body.lang-ar {
@@ -1501,21 +1513,12 @@ body.lang-ar .hero-badge::before {
   max-height: 340px;
   overflow-y: auto;
   padding-right: 0.25rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--baccent) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .pd-related-list::-webkit-scrollbar {
-  width: 3px;
-}
-
-.pd-related-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.pd-related-list::-webkit-scrollbar-thumb {
-  background: var(--baccent);
-  border-radius: 99px;
+  display: none;
 }
 
 .pd-related-card {
