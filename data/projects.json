@@ -40,9 +40,9 @@
     "challenge": "The trickiest part was syncing order status in real time between the customer view and kitchen display without WebSockets — solved using lightweight polling with PHP endpoints and optimistic UI updates on the frontend.",
     "learned": "This project pushed me deep into database normalisation, session management, and building a full authentication flow from scratch. It also taught me how to structure a multi-role application where the same backend serves completely different UI needs.",
     "gallery": [
-      { "label": "menu.html", "caption": "Customer Menu & Ordering Interface", "wide": true, "img": "assets/screenshots/project-0/menu.png" },
-      { "label": "admin/orders.html", "caption": "Admin Dashboard — Orders", "wide": false, "img": "assets/screenshots/project-0/admin-orders.png" },
-      { "label": "kitchen.html", "caption": "Kitchen Display System", "wide": false, "img": "assets/screenshots/project-0/kitchen.png" }
+      { "label": "menu.html", "caption": "Customer Menu & Ordering Interface", "wide": true, "img": "assets/screenshots/project-0/Loadingscreen.jpeg" },
+      { "label": "admin/orders.html", "caption": "Admin Dashboard — Orders", "wide": false, "img": "assets/screenshots/project-0/Kitchen.png" },
+      { "label": "kitchen.html", "caption": "Kitchen Display System", "wide": false, "img": "assets/screenshots/project-0/Cart.png" }
     ]
   },
   {
