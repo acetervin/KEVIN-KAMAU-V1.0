@@ -64,9 +64,6 @@ if(_prog){
 // vertical scroll 1-to-1 into horizontal scrollLeft on the card track.
 // Works in both directions (scroll up = scroll back left).
 (function () {
-  if (!('ontouchstart' in window) && window.innerWidth > 860) return;
-  if (window.innerWidth > 860) return;
-
   // ── CONFIG ────────────────────────────────────────────
   var SECTIONS = [
     {
@@ -88,16 +85,13 @@ if(_prog){
   if (!SECTIONS.length) return;
 
   // ── SETUP ─────────────────────────────────────────────
-  // Give each section a height equal to viewport + scrollable width,
-  // so the sticky panel has exactly enough vertical budget.
   function setup() {
+    if (window.innerWidth > 860) return;
     SECTIONS.forEach(function (s) {
       var scrollable = s.grid.scrollWidth - s.grid.clientWidth;
-      // section height = one viewport (so sticky panel is visible) + scrollable budget
       s.wrap.style.height = (window.innerHeight + scrollable) + 'px';
       s._scrollable = scrollable;
 
-      // Build pips once
       if (s.pips && !s.pips._built) {
         s.pips._built = true;
         var count = s.grid.children.length;
@@ -113,30 +107,23 @@ if(_prog){
 
   // ── TICK ──────────────────────────────────────────────
   function tick() {
+    if (window.innerWidth > 860) return;
     var sy = window.scrollY;
 
     SECTIONS.forEach(function (s) {
-      var wTop  = s.wrap.getBoundingClientRect().top + sy; // section top in doc
+      var wTop  = s.wrap.getBoundingClientRect().top + sy;
       var scrollable = s._scrollable || 0;
-
-      // How far into the section's vertical budget the user has scrolled
-      // (0 at section entry, scrollable at section exit)
       var raw = sy - wTop;
       var clamped = Math.max(0, Math.min(scrollable, raw));
 
-      // Drive scrollLeft — this is what moves the cards
       s.grid.scrollLeft = clamped;
-
-      // Also update the skew transform (keeps slant, no extra drift)
       s.grid.style.transform = 'skewX(' + s.skew + 'deg)';
 
-      // Update pips
       if (s.pips) {
         var pips = s.pips.querySelectorAll('.hscroll-pip');
         var count = pips.length;
         if (count) {
           var prog = scrollable > 0 ? clamped / scrollable : 0;
-          // Which pip is "active" based on progress
           var activeIdx = Math.min(count - 1, Math.floor(prog * count));
           pips.forEach(function (pip, i) {
             pip.classList.toggle('active', i === activeIdx);
@@ -147,11 +134,10 @@ if(_prog){
   }
 
   // ── SCROLL LOCK ───────────────────────────────────────
-  // Prevent the page from scrolling past a section until its
-  // horizontal track is fully consumed (in both directions).
   var _ticking = false;
 
   function onScroll() {
+    if (window.innerWidth > 860) return;
     if (!_ticking) {
       _ticking = true;
       requestAnimationFrame(function () {
@@ -161,8 +147,6 @@ if(_prog){
     }
   }
 
-  // Touch-based scroll interception — convert vertical swipe to scrollLeft
-  // while inside a section's scroll budget, blocking native vertical scroll.
   var _touch = { y: 0, locked: false, section: null };
 
   function findActiveSection() {
@@ -171,36 +155,34 @@ if(_prog){
       var s = SECTIONS[i];
       var wTop = s.wrap.getBoundingClientRect().top + sy;
       var raw  = sy - wTop;
-      // Inside the budget zone
       if (raw >= 0 && raw <= (s._scrollable || 0)) return s;
     }
     return null;
   }
 
   document.addEventListener('touchstart', function (e) {
+    if (window.innerWidth > 860) return;
     _touch.y = e.touches[0].clientY;
     _touch.section = findActiveSection();
     _touch.locked = false;
   }, { passive: true });
 
   document.addEventListener('touchmove', function (e) {
+    if (window.innerWidth > 860) return;
     if (!_touch.section) return;
     var s   = _touch.section;
-    var dy  = _touch.y - e.touches[0].clientY; // positive = swipe up = scroll down
+    var dy  = _touch.y - e.touches[0].clientY;
     var sy  = window.scrollY;
     var wTop = s.wrap.getBoundingClientRect().top + sy;
     var raw  = sy - wTop;
     var scrollable = s._scrollable || 0;
 
-    // Would the swipe take us inside the horizontal budget?
     var wouldBe = raw + dy;
     if (wouldBe >= 0 && wouldBe <= scrollable) {
-      // Consume the swipe as horizontal scroll — block vertical
       e.preventDefault();
       window.scrollTo({ top: wTop + wouldBe, behavior: 'instant' });
       _touch.y = e.touches[0].clientY;
     }
-    // else: let native scroll handle it (we've hit start or end of track)
   }, { passive: false });
 
   // ── INIT ──────────────────────────────────────────────
@@ -211,10 +193,8 @@ if(_prog){
 
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Re-setup on orientation change / resize
   window.addEventListener('resize', function () {
     if (window.innerWidth > 860) {
-      // Desktop — undo everything
       SECTIONS.forEach(function (s) {
         s.wrap.style.height = '';
         s.grid.scrollLeft = 0;
