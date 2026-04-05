@@ -36,27 +36,31 @@
         <div class="term-line" id="tl9"></div>
         <div class="tl-cursor" id="tlcur"></div>
         <!-- Network gauge widget -->
-        <div id="net-gauge" style="display:none;margin-top:.8rem;padding:.8rem;background:rgba(212,168,75,.06);border:1px solid rgba(212,168,75,.2);border-radius:6px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;">
-            <span style="font-size:.65rem;color:#d4a84b;letter-spacing:.15em;">DOWNLOAD</span>
-            <span id="ng-mbps" style="font-size:1.1rem;font-weight:700;color:#d4a84b;">-- Mbps</span>
-            <span id="ng-quality" style="font-size:.62rem;letter-spacing:.1em;">--</span>
+        <div id="net-gauge" style="display:none">
+          <div class="ng-header">
+            <span class="ng-label">NET_DIAGNOSTIC_DOWNLOAD</span>
+            <span id="ng-mbps" class="ng-value">-- Mbps</span>
+            <span id="ng-quality" class="ng-quality">--</span>
           </div>
-          <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;">
-            <div id="ng-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#d4a84b,#e8c87a);border-radius:3px;transition:width .5s ease;box-shadow:0 0 8px rgba(212,168,75,.5);"></div>
+          <div class="ng-bar-wrap">
+            <div id="ng-bar"></div>
           </div>
-          <div style="display:flex;justify-content:space-between;margin-top:.5rem;">
-            <span style="font-size:.58rem;color:rgba(255,255,255,.25);">0</span>
-            <span style="font-size:.58rem;color:rgba(255,255,255,.25);">25 Mbps</span>
-            <span style="font-size:.58rem;color:rgba(255,255,255,.25);">100+</span>
+          <div class="ng-grid">
+            <div class="ng-item">
+              <span id="ng-ping" class="ng-item-val" style="color:#64b5f6;">--</span>
+              <span class="ng-item-lbl">PING_MS</span>
+            </div>
+            <div class="ng-item">
+              <span id="ng-load" class="ng-item-val" style="color:#28c840;">--</span>
+              <span class="ng-item-lbl">EST_LOAD</span>
+            </div>
+            <div class="ng-item">
+              <span id="ng-size" class="ng-item-val">760KB</span>
+              <span class="ng-item-lbl">PAGE_SIZE</span>
+            </div>
           </div>
-          <div style="margin-top:.6rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;text-align:center;">
-            <div><div id="ng-ping" style="font-size:.9rem;font-weight:700;color:#64b5f6;">--</div><div style="font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">PING ms</div></div>
-            <div><div id="ng-load" style="font-size:.9rem;font-weight:700;color:#28c840;">--</div><div style="font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">EST LOAD</div></div>
-            <div><div id="ng-size" style="font-size:.9rem;font-weight:700;color:#d4a84b;">760KB</div><div style="font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">PAGE SIZE</div></div>
-          </div>
-          <div style="margin-top:.5rem;text-align:center;">
-            <span id="ng-type" style="font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.25);letter-spacing:.12em;">DETECTING...</span>
+          <div class="ng-footer">
+            <span id="ng-type">DETECTING_PROTOCOL...</span>
           </div>
         </div>
       </div>

@@ -130,15 +130,17 @@
     if(ngMbps)    { ngMbps.textContent = speedMbps ? speedMbps + ' Mbps' : '-- Mbps'; ngMbps.style.color = qColor; }
     if(ngQuality) { ngQuality.textContent = qLabel; ngQuality.style.color = qColor; }
     if(ngLoad)    { ngLoad.textContent = estLoadStr; }
-    if(ngType)    { ngType.textContent = effType ? effType.toUpperCase() : 'BROWSER'; }
+    if(ngType)    { ngType.textContent = effType ? effType.toUpperCase() : 'BROWSER_CORE'; }
     if(ngPing)    {
       if(pingMs){ ngPing.textContent = pingMs + 'ms'; ngPing.style.color = pingMs < 80 ? '#28c840' : pingMs < 200 ? '#febc2e' : '#ff5f57'; }
       else { ngPing.textContent = '--'; }
     }
     if(ngBar){
       var pct = speedMbps ? Math.min(100, Math.max(2, (speedMbps / 100) * 100)) : 3;
-      // Animate bar in after a tick
-      setTimeout(function(){ ngBar.style.width = pct + '%'; ngBar.style.background = qColor; ngBar.style.boxShadow = '0 0 8px ' + qColor; }, 100);
+      setTimeout(function(){ 
+        ngBar.style.width = pct + '%'; 
+        ngBar.style.background = qColor;
+      }, 100);
     }
   }, 3900);
 
