@@ -309,11 +309,13 @@ if(cur){
 function cfSubmit(){
   var ids = ['cf-name','cf-email','cf-subject','cf-msg'];
   var valid = true;
+  var data = {};
   ids.forEach(function(id){
     var el = document.getElementById(id);
     if (!el) return;
     el.classList.remove('err');
     if (!el.value.trim()) { el.classList.add('err'); valid = false; }
+    data[id.replace('cf-', '')] = el.value.trim();
   });
   if (!valid) return;
 
@@ -326,12 +328,34 @@ function cfSubmit(){
   if (btnTxt) btnTxt.textContent = lang === 'ar' ? 'جارٍ الإرسال...' : 'Sending...';
   if (btnIco) btnIco.innerHTML = '<span class="cf-spin">&#9696;</span>';
 
-  setTimeout(function(){
-    var fields = document.getElementById('cf-fields');
-    var success = document.getElementById('cf-success');
-    if (fields) fields.style.display = 'none';
-    if (success) success.classList.add('show');
-  }, 1800);
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(resData) {
+    if (resData.success) {
+      setTimeout(function(){
+        var fields = document.getElementById('cf-fields');
+        var success = document.getElementById('cf-success');
+        if (fields) fields.style.display = 'none';
+        if (success) success.classList.add('show');
+      }, 800);
+    } else {
+      alert(resData.message || 'Error sending message');
+      if (btn) btn.classList.remove('sending');
+      if (btnTxt) btnTxt.textContent = lang === 'ar' ? 'إرسال الرسالة' : 'Send Message';
+      if (btnIco) btnIco.textContent = '→';
+    }
+  })
+  .catch(function(err) {
+    console.error('Submission error:', err);
+    alert('Failed to connect to the server. Please ensure the server is running.');
+    if (btn) btn.classList.remove('sending');
+    if (btnTxt) btnTxt.textContent = lang === 'ar' ? 'إرسال الرسالة' : 'Send Message';
+    if (btnIco) btnIco.textContent = '→';
+  });
 }
 
 function cfReset(){
