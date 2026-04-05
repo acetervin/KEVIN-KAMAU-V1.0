@@ -84,13 +84,33 @@ if(_prog){
 
   if (!SECTIONS.length) return;
 
+  var isDesktop = window.innerWidth > 860;
+  var sy = window.scrollY;
+  var isLerping = false;
+
   // ── SETUP ─────────────────────────────────────────────
   function setup() {
-    if (window.innerWidth > 860) return;
+    isDesktop = window.innerWidth > 860;
+    sy = window.scrollY;
+    
+    if (isDesktop) {
+      SECTIONS.forEach(function (s) {
+        s.wrap.style.height = '';
+        s.grid.scrollLeft = 0;
+        s.grid.style.transform = '';
+      });
+      return;
+    }
+    
     SECTIONS.forEach(function (s) {
       var scrollable = s.grid.scrollWidth - s.grid.clientWidth;
       s.wrap.style.height = (window.innerHeight + scrollable) + 'px';
       s._scrollable = scrollable;
+      // Cache the exact document-relative top position to prevent layout thrashing on scroll
+      s._docTop = s.wrap.getBoundingClientRect().top + sy;
+      
+      s._currentX = s._currentX || 0;
+      s._targetX = s._targetX || 0;
 
       if (s.pips && !s.pips._built) {
         s.pips._built = true;
@@ -103,107 +123,90 @@ if(_prog){
         }
       }
     });
+    
+    computeTargets();
+    startLerp();
   }
 
-  // ── TICK ──────────────────────────────────────────────
-  function tick() {
-    if (window.innerWidth > 860) return;
-    var sy = window.scrollY;
-
+  // ── COMPUTE TARGET ────────────────────────────────────
+  function computeTargets() {
+    if (isDesktop) return;
     SECTIONS.forEach(function (s) {
-      var wTop  = s.wrap.getBoundingClientRect().top + sy;
-      var scrollable = s._scrollable || 0;
-      var raw = sy - wTop;
-      var clamped = Math.max(0, Math.min(scrollable, raw));
-
-      s.grid.scrollLeft = clamped;
-      s.grid.style.transform = 'skewX(' + s.skew + 'deg)';
-
-      if (s.pips) {
-        var pips = s.pips.querySelectorAll('.hscroll-pip');
-        var count = pips.length;
-        if (count) {
-          var prog = scrollable > 0 ? clamped / scrollable : 0;
-          var activeIdx = Math.min(count - 1, Math.floor(prog * count));
-          pips.forEach(function (pip, i) {
-            pip.classList.toggle('active', i === activeIdx);
-          });
-        }
-      }
+      var raw = sy - s._docTop;
+      s._targetX = Math.max(0, Math.min(s._scrollable || 0, raw));
     });
   }
 
-  // ── SCROLL LOCK ───────────────────────────────────────
-  var _ticking = false;
+  // ── SMOOTH LERP LOOP (120 FPS Optimized) ──────────────
+  function startLerp() {
+    if (isLerping || isDesktop) return;
+    isLerping = true;
+    requestAnimationFrame(lerpLoop);
+  }
 
-  function onScroll() {
-    if (window.innerWidth > 860) return;
-    if (!_ticking) {
-      _ticking = true;
-      requestAnimationFrame(function () {
-        tick();
-        _ticking = false;
-      });
+  function lerpLoop() {
+    if (isDesktop) {
+      isLerping = false;
+      return;
+    }
+    
+    var needsNextFrame = false;
+
+    SECTIONS.forEach(function (s) {
+      // Smooth interpolation factor (higher = faster snap, lower = smoother lag)
+      var diff = s._targetX - s._currentX;
+      if (Math.abs(diff) > 0.5) {
+        s._currentX += diff * 0.18; // 18% closure per frame for buttery feel
+        needsNextFrame = true;
+      } else {
+        s._currentX = s._targetX;
+      }
+
+      // Update DOM
+      s.grid.scrollLeft = s._currentX;
+      s.grid.style.transform = 'skewX(' + s.skew + 'deg)';
+
+      // Update Pips
+      if (s.pips) {
+        var pips = s.pips.querySelectorAll('.hscroll-pip');
+        var count = pips.length;
+        if (count && s._scrollable > 0) {
+          var prog = s._currentX / s._scrollable;
+          var activeIdx = Math.min(count - 1, Math.floor(prog * count));
+          if (s._lastActiveIdx !== activeIdx) {
+            s._lastActiveIdx = activeIdx;
+            pips.forEach(function (pip, i) {
+              pip.classList.toggle('active', i === activeIdx);
+            });
+          }
+        }
+      }
+    });
+
+    if (needsNextFrame) {
+      requestAnimationFrame(lerpLoop);
+    } else {
+      isLerping = false; // Sleep to save battery when not scrolling
     }
   }
 
-  var _touch = { y: 0, locked: false, section: null };
-
-  function findActiveSection() {
-    var sy = window.scrollY;
-    for (var i = 0; i < SECTIONS.length; i++) {
-      var s = SECTIONS[i];
-      var wTop = s.wrap.getBoundingClientRect().top + sy;
-      var raw  = sy - wTop;
-      if (raw >= 0 && raw <= (s._scrollable || 0)) return s;
+  // ── SCROLL ────────────────────────────────────────────
+  window.addEventListener('scroll', function () {
+    sy = window.scrollY;
+    if (!isDesktop) {
+      computeTargets();
+      startLerp();
     }
-    return null;
-  }
-
-  document.addEventListener('touchstart', function (e) {
-    if (window.innerWidth > 860) return;
-    _touch.y = e.touches[0].clientY;
-    _touch.section = findActiveSection();
-    _touch.locked = false;
   }, { passive: true });
 
-  document.addEventListener('touchmove', function (e) {
-    if (window.innerWidth > 860) return;
-    if (!_touch.section) return;
-    var s   = _touch.section;
-    var dy  = _touch.y - e.touches[0].clientY;
-    var sy  = window.scrollY;
-    var wTop = s.wrap.getBoundingClientRect().top + sy;
-    var raw  = sy - wTop;
-    var scrollable = s._scrollable || 0;
-
-    var wouldBe = raw + dy;
-    if (wouldBe >= 0 && wouldBe <= scrollable) {
-      e.preventDefault();
-      window.scrollTo({ top: wTop + wouldBe, behavior: 'instant' });
-      _touch.y = e.touches[0].clientY;
-    }
-  }, { passive: false });
-
   // ── INIT ──────────────────────────────────────────────
-  window.addEventListener('load', function () {
-    setup();
-    tick();
-  });
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-
+  window.addEventListener('load', setup);
+  
+  // Throttle resize to avoid spamming setup
+  var resizeTimer;
   window.addEventListener('resize', function () {
-    if (window.innerWidth > 860) {
-      SECTIONS.forEach(function (s) {
-        s.wrap.style.height = '';
-        s.grid.scrollLeft = 0;
-        s.grid.style.transform = '';
-      });
-    } else {
-      setup();
-      tick();
-    }
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setup, 150);
   }, { passive: true });
 })();
 
