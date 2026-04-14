@@ -84,9 +84,9 @@
     "challenge": "Learning TypeScript's type system while building a real project simultaneously was a steep curve. Generic types for reusable table components and correctly typing API responses took multiple iterations to get right.",
     "learned": "TypeScript forced me to think about data shapes before writing logic — a discipline that made the codebase significantly easier to debug. I also got solid practice in component architecture and prop drilling vs context patterns in React.",
     "gallery": [
-      { "label": "dashboard/index.tsx", "caption": "Dashboard — Analytics Overview", "wide": true, "img": "assets/screenshots/project-1/dashboard.png" },
-      { "label": "pages/users.tsx", "caption": "Users Table View", "wide": false, "img": "assets/screenshots/project-1/users.png" },
-      { "label": "pages/settings.tsx", "caption": "Settings Panel", "wide": false, "img": "assets/screenshots/project-1/settings.png" }
+      { "label": "dashboard/index.tsx", "caption": "Dashboard — Analytics Overview", "wide": true, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect fill='%23e0e0e0' width='1200' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" },
+      { "label": "pages/users.tsx", "caption": "Users Table View", "wide": false, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" },
+      { "label": "pages/settings.tsx", "caption": "Settings Panel", "wide": false, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" }
     ]
   },
   {
@@ -127,9 +127,9 @@
     "challenge": "Currently exploring cloud deployment — taking scripts that run locally and making them run reliably on cloud infrastructure. Also diving into data structures more formally as part of university coursework.",
     "learned": "Python's ecosystem is vast — this project has been my playground for exploring it. Working with real data (messy, incomplete, inconsistent) taught me more about defensive programming than any tutorial ever could.",
     "gallery": [
-      { "label": "scripts/", "caption": "Automation Scripts Collection", "wide": true, "img": "assets/screenshots/project-2/scripts.png" },
-      { "label": "data/", "caption": "Data Processing Pipeline", "wide": false, "img": "assets/screenshots/project-2/data.png" },
-      { "label": "cloud/", "caption": "Cloud Functions", "wide": false, "img": "assets/screenshots/project-2/cloud.png" }
+      { "label": "scripts/", "caption": "Automation Scripts Collection", "wide": true, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect fill='%23e0e0e0' width='1200' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" },
+      { "label": "data/", "caption": "Data Processing Pipeline", "wide": false, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" },
+      { "label": "cloud/", "caption": "Cloud Functions", "wide": false, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" }
     ]
   },
   {
