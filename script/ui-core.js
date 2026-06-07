@@ -40,6 +40,10 @@ function setLang(l){
     renderAllPanels();
     setTimeout(function(){ switchProject(currentPanel); }, 50);
   }
+
+  if(typeof renderProjectsArchive === 'function'){
+    renderProjectsArchive();
+  }
 }
 
 function toggleTheme(){

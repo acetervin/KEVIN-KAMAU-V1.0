@@ -263,5 +263,50 @@
       { "label": "Property Listings", "caption": "Listings & Filters", "wide": false, "img": "assets/screenshots/project-5/Tetezi Properties Kenya Project.png" },
       { "label": "Property Detail", "caption": "Property Detail View", "wide": false, "img": "assets/screenshots/project-5/Tetezi Properties Kenya Project Details.png" }
     ]
+  },
+  {
+    "id": 6,
+    "num": "07",
+    "icon": "fa-solid fa-cart-shopping",
+    "title": "Stationery Central Depot",
+    "titleAr": "ستيشنري سنترال ديبوت",
+    "tags": ["Next.js", "React", "Supabase", "M-Pesa", "Cloudinary"],
+    "desc": "Next.js ecommerce storefront and admin dashboard for a Kenyan stationery brand, with Supabase auth, product management, and secure M-Pesa checkout flows.",
+    "descAr": "متجر إلكتروني ولوحة إدارة مبنيان بـ Next.js لعلامة أدوات مكتبية كينية، مع Supabase وإدارة المنتجات ودفع M-Pesa.",
+    "github": "https://github.com/acetervin/wordpress-static-export-reactV1",
+    "live": "https://stationerycentraldepot.ke/",
+    "eyebrow": "Product / E-commerce",
+    "eyebrowAr": "منتج / تجارة إلكترونية",
+    "type": "E-commerce Platform",
+    "year": "2026",
+    "role": "Full Stack Developer",
+    "status": "live",
+    "statusLabel": "Live",
+    "stack": [
+      { "icon": "fa-brands fa-react", "name": "Next.js / React", "role": "Frontend" },
+      { "icon": "fa-solid fa-database", "name": "Supabase", "role": "Auth + Postgres" },
+      { "icon": "fa-solid fa-cloud", "name": "Cloudinary", "role": "Media Pipeline" },
+      { "icon": "fa-solid fa-mobile-screen-button", "name": "M-Pesa / KCB Buni", "role": "Payments" },
+      { "icon": "fa-solid fa-boxes-stacked", "name": "Zustand + Admin Tools", "role": "State + Ops" }
+    ],
+    "overview": [
+      "Stationery Central Depot is a full ecommerce build for a Kenyan stationery brand, combining a customer storefront with a protected admin dashboard in one Next.js 16 application.",
+      "The platform covers product discovery, cart and wishlist state, guest and account-based checkout, inventory-aware order creation, and local payment flows powered by Supabase and M-Pesa integrations."
+    ],
+    "features": [
+      "Supabase-backed catalog with search, filtering, sorting, pagination, and product detail pages",
+      "Protected admin dashboard for products, orders, user roles, and payment-provider settings",
+      "Guest and authenticated checkout flows with inventory holds and confirmation tracking",
+      "M-Pesa Daraja STK Push and KCB Buni payment handling through Supabase Edge Functions",
+      "Cloudinary-based product image pipeline plus publish, stock, and sold-out controls",
+      "Wishlist, cart persistence, and responsive storefront UX tuned for mobile shoppers"
+    ],
+    "challenge": "The hardest part was making checkout reliable across multiple payment paths while keeping the browser untrusted. Orders are created first, payment state is tracked server-side, and the M-Pesa callbacks finalize status through controlled backend transitions.",
+    "learned": "This project sharpened my understanding of real commerce architecture: server/client boundaries in Next.js, secure auth with role separation, idempotent payment flows, and designing admin tooling that operators can actually use day to day.",
+    "gallery": [
+      { "label": "Homepage", "caption": "Homepage - Storefront Entry Experience", "wide": true, "img": "assets/screenshots/project-6/Stationery Central Homepage.png" },
+      { "label": "Shop Page", "caption": "Shop Collections and Product Browse Flow", "wide": false, "img": "assets/screenshots/project-6/Stationery Central Shop Page.png" },
+      { "label": "Admin Dashboard", "caption": "Operations Dashboard and Revenue Snapshot", "wide": false, "img": "assets/screenshots/project-6/Stationery Central Admin Dashboard.png" }
+    ]
   }
 ]

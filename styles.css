@@ -1001,6 +1001,366 @@ body.lang-ar .hero-badge::before {
   margin-top: 2.8rem;
 }
 
+.projects-archive {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 7rem 3rem 5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.projects-archive::before {
+  content: "";
+  position: absolute;
+  right: 2rem;
+  top: 7rem;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 110, 58, 0.18), transparent 68%);
+  pointer-events: none;
+  filter: blur(4px);
+}
+
+.projects-archive-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) 320px;
+  gap: 1.4rem;
+  align-items: end;
+  margin-bottom: 2.6rem;
+}
+
+.projects-archive-copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.projects-archive-intro {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+  transition: color var(--speed);
+}
+
+.projects-archive-stats {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.projects-archive-stat {
+  display: grid;
+  gap: 0.32rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.03), transparent 58%),
+    var(--card);
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.08);
+}
+
+.projects-archive-stat-label,
+.projects-archive-stat-note {
+  font-family: "Space Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.projects-archive-stat-label {
+  color: var(--accent);
+  font-size: 0.68rem;
+}
+
+.projects-archive-stat-value {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1;
+}
+
+.projects-archive-stat-note {
+  color: var(--muted);
+  font-size: 0.58rem;
+}
+
+.projects-spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: 0;
+  background:
+    linear-gradient(135deg, rgba(212,110,58,0.08), transparent 45%),
+    linear-gradient(180deg, rgba(255,255,255,0.03), transparent),
+    var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.14);
+}
+
+.projects-spotlight-media {
+  position: relative;
+  min-height: 480px;
+  background: #111;
+}
+
+.projects-spotlight-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.projects-spotlight-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.62)),
+    linear-gradient(135deg, rgba(212,110,58,0.12), transparent 58%);
+}
+
+.projects-spotlight-caption {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.4rem;
+  display: grid;
+  gap: 0.35rem;
+  color: #fff;
+}
+
+.projects-spotlight-label {
+  font-family: "Space Mono", monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+}
+
+.projects-spotlight-copy {
+  padding: 2rem;
+  display: grid;
+  gap: 1rem;
+  align-content: center;
+}
+
+.projects-kicker {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.projects-spotlight-title {
+  font-size: clamp(2.3rem, 4vw, 4.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.projects-spotlight-desc {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 0.96rem;
+}
+
+.projects-meta-strip,
+.archive-project-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.projects-meta-chip,
+.archive-project-detail,
+.archive-project-status {
+  font-family: "Space Mono", monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.45rem 0.78rem;
+  background: rgba(255,255,255,0.02);
+}
+
+.projects-stack-list {
+  display: grid;
+  gap: 0.65rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.projects-stack-entry {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.84rem;
+}
+
+.projects-stack-entry span:last-child {
+  color: var(--muted);
+}
+
+.projects-ledger-wrap {
+  margin-top: 2.6rem;
+}
+
+.projects-ledger-head {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+
+.projects-ledger-title {
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.projects-ledger-copy,
+.archive-project-overview,
+.archive-project-desc {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.projects-ledger {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.archive-project-row {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
+  gap: 1.2rem;
+  padding: 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.03), transparent 58%),
+    var(--card);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.1);
+}
+
+.archive-project-row.alt .archive-project-media {
+  order: 2;
+}
+
+.archive-project-row.alt .archive-project-copy {
+  order: 1;
+}
+
+.archive-project-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 124px;
+  gap: 0.85rem;
+  min-height: 320px;
+}
+
+.archive-project-cover,
+.archive-project-thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.archive-project-cover img,
+.archive-project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.archive-project-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.58));
+}
+
+.archive-project-cover-caption {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  display: grid;
+  gap: 0.3rem;
+  z-index: 1;
+  color: #fff;
+}
+
+.archive-project-cover-caption span,
+.archive-project-index {
+  font-family: "Space Mono", monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.archive-project-cover-caption span {
+  color: rgba(255,255,255,0.72);
+}
+
+.archive-project-thumbs {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.archive-project-thumb {
+  min-height: 152px;
+}
+
+.archive-project-thumb span {
+  position: absolute;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: 0.6rem;
+  z-index: 1;
+  font-family: "Space Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.archive-project-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.7));
+}
+
+.archive-project-copy {
+  display: grid;
+  gap: 0.95rem;
+  align-content: center;
+  padding: 0.35rem 0.2rem 0.35rem 0;
+}
+
+.archive-project-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.archive-project-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.archive-project-desc {
+  font-size: 0.95rem;
+}
+
+.archive-project-overview {
+  font-size: 0.92rem;
+}
+
 /* ── PROJECT DETAILS PAGE ───────────────────────────────────────────────────── */
 .pd-back-btn-wrapper {
   max-width: 1300px;
@@ -2967,6 +3327,48 @@ body.lang-ar .footer-meta {
   .p-desc { font-size: 0.83rem; }
   .p-actions { gap: 0.5rem; }
   .p-link { padding: 0.5rem 0.9rem; font-size: 0.61rem; }
+
+  .projects-archive {
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  .projects-archive-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-spotlight {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-spotlight-media {
+    min-height: 340px;
+  }
+
+  .projects-ledger {
+    gap: 1rem;
+  }
+
+  .archive-project-row,
+  .archive-project-media {
+    grid-template-columns: 1fr;
+  }
+
+  .archive-project-row.alt .archive-project-media,
+  .archive-project-row.alt .archive-project-copy {
+    order: initial;
+  }
+
+  .archive-project-thumb {
+    min-height: 120px;
+  }
+
+  .archive-project-thumbs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .archive-project-copy {
+    padding: 0.2rem;
+  }
 
   /* progress pip strip shown below each track */
   .hscroll-pips {
