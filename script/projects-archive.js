@@ -1,10 +1,55 @@
 var archiveProjects = [];
+var archiveCopy = {
+  intro: 'Selected builds with live links, repos, and full breakdowns.',
+  ledger: 'Short reads for each project: what it is, what it does, and where to inspect it.',
+  stats: {
+    projects: 'Projects shipped',
+    live: 'Live client and product work',
+    stacks: 'Primary tools used across the set'
+  },
+  summaries: {
+    0: {
+      desc: 'Restaurant ordering system with customer, kitchen, and admin flows.',
+      note: 'Built around PHP, MySQL, role-based access, and live order updates.'
+    },
+    1: {
+      desc: 'TypeScript admin dashboard with tables, charts, and role management.',
+      note: 'Focused on typed React patterns, reusable UI, and cleaner state handling.'
+    },
+    2: {
+      desc: 'Python automation work covering scraping, AI helpers, and cloud experiments.',
+      note: 'An active sandbox for tooling, data pipelines, and deployment trials.'
+    },
+    3: {
+      desc: 'NGO website for programmes, events, and donor-facing communication.',
+      note: 'Client work built for clarity, speed, and mobile-first access.'
+    },
+    4: {
+      desc: 'Interior studio portfolio built around large imagery and editorial layout.',
+      note: 'Designed to feel premium without sacrificing load time or usability.'
+    },
+    5: {
+      desc: 'Real-estate site with listings, content updates, and ongoing maintenance.',
+      note: 'The work spans feature delivery, CMS updates, and long-tail upkeep.'
+    },
+    6: {
+      desc: 'Next.js commerce build with storefront, admin tools, and M-Pesa checkout.',
+      note: 'Combines Supabase auth, product ops, and payment flow control.'
+    }
+  }
+};
 
 function archiveTitle(project) {
   return lang === 'ar' && project.titleAr ? project.titleAr : project.title;
 }
 
+function archiveSummaryCopy(project) {
+  return archiveCopy.summaries[project.id] || null;
+}
+
 function archiveDesc(project) {
+  var summary = archiveSummaryCopy(project);
+  if (summary && summary.desc) return summary.desc;
   return lang === 'ar' && project.descAr ? project.descAr : project.desc;
 }
 
@@ -22,13 +67,13 @@ function archiveDisplayStatus(project) {
 function archivePrimaryActionHTML(project) {
   if (project.live) {
     return '<a href="' + project.live + '" target="_blank" data-browser="true" class="p-link p-link-pri">' +
-      'Open Live Site' +
+      'Open Site' +
     '</a>';
   }
 
   if (project.github) {
     return '<a href="' + project.github + '" target="_blank" data-browser="true" class="p-link p-link-pri">' +
-      'View Repository' +
+      'Open Repo' +
     '</a>';
   }
 
@@ -38,7 +83,7 @@ function archivePrimaryActionHTML(project) {
 function archiveSecondaryActionHTML(project) {
   if (project.live && project.github) {
     return '<a href="' + project.github + '" target="_blank" data-browser="true" class="p-link p-link-sec">' +
-      'View Repository' +
+      'Open Repo' +
     '</a>';
   }
 
@@ -46,6 +91,8 @@ function archiveSecondaryActionHTML(project) {
 }
 
 function archiveOverview(project) {
+  var summary = archiveSummaryCopy(project);
+  if (summary && summary.note) return summary.note;
   var overview = lang === 'ar' && project.overviewAr ? project.overviewAr : project.overview;
   return overview && overview.length ? overview[0] : archiveDesc(project);
 }
@@ -76,7 +123,7 @@ function archiveActionsHTML(project) {
   return '<div class="p-actions">' +
     archivePrimaryActionHTML(project) +
     archiveSecondaryActionHTML(project) +
-    '<a href="project-details.html?p=' + project.id + '" class="p-link p-link-sec">Case Study</a>' +
+    '<a href="project-details.html?p=' + project.id + '" class="p-link p-link-sec">Full Breakdown</a>' +
   '</div>';
 }
 
@@ -102,9 +149,9 @@ function renderArchiveStats(projects) {
   });
 
   host.innerHTML = [
-    archiveStatCardHTML('Projects', String(projects.length).padStart(2, '0'), 'Published case studies'),
-    archiveStatCardHTML('Live Launches', String(liveCount).padStart(2, '0'), 'Production work and active builds'),
-    archiveStatCardHTML('Core Stacks', String(Object.keys(uniqueTags).length).padStart(2, '0'), 'Tools and platforms across the archive')
+    archiveStatCardHTML('Projects', String(projects.length).padStart(2, '0'), archiveCopy.stats.projects),
+    archiveStatCardHTML('Live Launches', String(liveCount).padStart(2, '0'), archiveCopy.stats.live),
+    archiveStatCardHTML('Core Stacks', String(Object.keys(uniqueTags).length).padStart(2, '0'), archiveCopy.stats.stacks)
   ].join('');
 }
 
@@ -118,7 +165,7 @@ function renderSpotlight(project) {
     (cover.img ? '<img src="' + cover.img + '" alt="' + cover.caption + '" loading="lazy" />' : '') +
     '<div class="projects-spotlight-overlay"></div>' +
     '<div class="projects-spotlight-caption">' +
-      '<span class="projects-spotlight-label">Featured Build</span>' +
+      '<span class="projects-spotlight-label">Latest Build</span>' +
       '<strong>' + cover.label + '</strong>' +
     '</div>' +
   '</div>' +
@@ -197,11 +244,11 @@ function renderArchiveCopy() {
   var ledger = document.getElementById('projects-ledger-copy');
 
   if (intro) {
-    intro.textContent = 'A dedicated archive for the portfolio work, with spotlight coverage for the newest build and a cleaner read on every case study.';
+    intro.textContent = archiveCopy.intro;
   }
 
   if (ledger) {
-    ledger.textContent = 'Browse the work like a dossier instead of a card wall: screenshots, build context, stack choices, and direct paths into each full case study.';
+    ledger.textContent = archiveCopy.ledger;
   }
 }
 

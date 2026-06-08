@@ -2,6 +2,14 @@
 
 var allProjects = [];
 var currentPanel = 0;
+var projectNavigationReady = false;
+var projectSwipe = {
+  tracking: false,
+  startX: 0,
+  startY: 0,
+  deltaX: 0,
+  deltaY: 0
+};
 
 // ── HELPERS ──────────────────────────────────────────────────────────────────
 function statusHTML(p) {
@@ -27,7 +35,7 @@ function tagsHTML(tags) {
 function relatedHTML(p) {
   var cards = allProjects.filter(function(r) { return r.id !== p.id; }).map(function(r) {
     var name = (lang === 'ar' && r.titleAr) ? r.titleAr : r.title;
-    return '<a href="#" class="pd-related-card" onclick="switchProject(' + r.id + ');return false;">' +
+    return '<a href="#" class="pd-related-card" onclick="switchProjectById(' + r.id + ');return false;">' +
       '<div class="pd-related-icon"><i class="' + r.icon + '" aria-hidden="true"></i></div>' +
       '<div><div class="pd-related-name">' + name + '</div>' +
       '<div class="pd-related-tech">' + r.tags.slice(0, 3).join(' · ') + '</div></div>' +
@@ -130,22 +138,142 @@ function renderTabs() {
 function renderAllPanels() {
   document.querySelectorAll('.pd-panel').forEach(function(p) { p.remove(); });
   var sel = document.querySelector('.pd-selector');
+  if (!sel || !sel.parentNode) return;
   var tmp = document.createElement('div');
   tmp.innerHTML = allProjects.map(function(p, i) { return renderPanel(p, i); }).join('');
   var frag = document.createDocumentFragment();
   while (tmp.firstChild) frag.appendChild(tmp.firstChild);
   sel.parentNode.insertBefore(frag, sel.nextSibling);
-  var first = document.getElementById('panel-0');
-  if (first) first.classList.add('active');
+  document.querySelectorAll('.pd-panel').forEach(function(panel, i) {
+    panel.classList.toggle('active', i === currentPanel);
+  });
 }
 
 // ── SWITCHING ────────────────────────────────────────────────────────────────
-function switchProject(idx) {
+function projectIndexById(projectId) {
+  for (var i = 0; i < allProjects.length; i++) {
+    if (allProjects[i].id === projectId) return i;
+  }
+  return -1;
+}
+
+function syncActiveTab(idx, behavior) {
+  var activeTab = document.querySelectorAll('.pd-tab')[idx];
+  if (!activeTab || typeof activeTab.scrollIntoView !== 'function') return;
+
+  activeTab.scrollIntoView({
+    block: 'nearest',
+    inline: 'center',
+    behavior: behavior || 'smooth'
+  });
+}
+
+function syncProjectUrl(idx) {
+  var project = allProjects[idx];
+  if (!project || !window.history || typeof window.history.replaceState !== 'function') return;
+
+  var url = new URL(window.location.href);
+  url.searchParams.set('p', project.id);
+  window.history.replaceState({}, '', url.toString());
+}
+
+function switchProjectById(projectId, options) {
+  var idx = projectIndexById(projectId);
+  if (idx === -1) return;
+  switchProject(idx, options);
+}
+
+function switchProject(idx, options) {
+  options = options || {};
+  if (!allProjects.length) return;
+
+  idx = Math.max(0, Math.min(allProjects.length - 1, idx));
   document.querySelectorAll('.pd-tab').forEach(function(t, i) { t.classList.toggle('active', i === idx); });
   document.querySelectorAll('.pd-panel').forEach(function(p, i) { p.classList.toggle('active', i === idx); });
   currentPanel = idx;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  syncActiveTab(idx, options.tabBehavior);
+  if (projectNavigationReady && !options.skipUrl) syncProjectUrl(idx);
+
+  window.scrollTo({ top: 0, behavior: options.scrollBehavior || 'smooth' });
   setTimeout(observePanel, 120);
+}
+
+function resetProjectSwipe() {
+  projectSwipe.tracking = false;
+  projectSwipe.startX = 0;
+  projectSwipe.startY = 0;
+  projectSwipe.deltaX = 0;
+  projectSwipe.deltaY = 0;
+}
+
+function canSwipeProjectsFrom(target) {
+  if (!target) return false;
+  if (!target.closest('.pd-panel.active')) return false;
+  if (target.closest('a, button, input, textarea, select, label')) return false;
+  if (target.closest('.pd-gallery-item, .lightbox, .pd-selector, nav, #mobile-menu')) return false;
+  return true;
+}
+
+function setupProjectSwipe() {
+  if (setupProjectSwipe.bound) return;
+  setupProjectSwipe.bound = true;
+
+  document.addEventListener('touchstart', function(e) {
+    if (e.touches.length !== 1) {
+      resetProjectSwipe();
+      return;
+    }
+
+    var lightbox = document.getElementById('lightbox');
+    if (lightbox && lightbox.classList.contains('open')) {
+      resetProjectSwipe();
+      return;
+    }
+
+    if (!canSwipeProjectsFrom(e.target)) {
+      resetProjectSwipe();
+      return;
+    }
+
+    var touch = e.touches[0];
+    projectSwipe.tracking = true;
+    projectSwipe.startX = touch.clientX;
+    projectSwipe.startY = touch.clientY;
+    projectSwipe.deltaX = 0;
+    projectSwipe.deltaY = 0;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function(e) {
+    if (!projectSwipe.tracking || e.touches.length !== 1) return;
+
+    var touch = e.touches[0];
+    projectSwipe.deltaX = touch.clientX - projectSwipe.startX;
+    projectSwipe.deltaY = touch.clientY - projectSwipe.startY;
+
+    if (Math.abs(projectSwipe.deltaY) > 34 && Math.abs(projectSwipe.deltaY) > Math.abs(projectSwipe.deltaX)) {
+      resetProjectSwipe();
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', function() {
+    if (!projectSwipe.tracking) return;
+
+    var absX = Math.abs(projectSwipe.deltaX);
+    var absY = Math.abs(projectSwipe.deltaY);
+
+    if (absX > 72 && absX > absY * 1.35) {
+      if (projectSwipe.deltaX < 0 && currentPanel < allProjects.length - 1) {
+        switchProject(currentPanel + 1, { scrollBehavior: 'auto', tabBehavior: 'smooth' });
+      } else if (projectSwipe.deltaX > 0 && currentPanel > 0) {
+        switchProject(currentPanel - 1, { scrollBehavior: 'auto', tabBehavior: 'smooth' });
+      }
+    }
+
+    resetProjectSwipe();
+  });
+
+  document.addEventListener('touchcancel', resetProjectSwipe);
 }
 
 // ── FADE-IN OBSERVER ─────────────────────────────────────────────────────────
@@ -220,6 +348,7 @@ fetch('data/projects.json')
     allProjects = data;
     renderTabs();
     renderAllPanels();
+    setupProjectSwipe();
     setLang('en');
 
     // Setup draggable tabs
@@ -256,12 +385,16 @@ fetch('data/projects.json')
     // Deep-link to a specific project via ?p=N
     var params = new URLSearchParams(window.location.search);
     var p = parseInt(params.get('p') || '0');
-    if (p > 0 && p < allProjects.length) {
-      switchProject(p);
+    if (params.has('p') && !isNaN(p) && projectIndexById(p) !== -1) {
+      switchProjectById(p, { scrollBehavior: 'auto', tabBehavior: 'auto' });
     } else {
       // Trigger fade-ins for the default first panel after a paint frame
       setTimeout(observePanel, 80);
     }
+
+    setTimeout(function() {
+      projectNavigationReady = true;
+    }, 120);
   })
   .catch(function(err) {
     console.error('Failed to load projects.json:', err);
