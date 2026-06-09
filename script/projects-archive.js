@@ -13,8 +13,8 @@ var archiveCopy = {
       note: 'Built around PHP, MySQL, role-based access, and live order updates.'
     },
     1: {
-      desc: 'TypeScript admin dashboard with tables, charts, and role management.',
-      note: 'Focused on typed React patterns, reusable UI, and cleaner state handling.'
+      desc: 'Desktop trading terminal with live charts, signals, and AI-assisted analysis.',
+      note: 'Built as a dense market workspace with TradingView, WebSockets, and dual AI panels.'
     },
     2: {
       desc: 'Python automation work covering scraping, AI helpers, and cloud experiments.',

@@ -5,7 +5,13 @@
     "icon": "fa-solid fa-utensils",
     "title": "Allen's Kitchen",
     "titleAr": "مطبخ آلن",
-    "tags": ["HTML", "CSS", "JS", "PHP", "MySQL"],
+    "tags": [
+      "HTML",
+      "CSS",
+      "JS",
+      "PHP",
+      "MySQL"
+    ],
     "desc": "A smart restaurant ordering platform — the flagship project. Full online food ordering and management system with a clean dashboard UI.",
     "descAr": "منصة طلب مطعم ذكية — المشروع الرئيسي. نظام متكامل للطلب الإلكتروني وإدارة المطعم.",
     "github": "https://github.com/acetervin/Allen-s_Kitchen",
@@ -18,11 +24,31 @@
     "status": "live",
     "statusLabel": "Live",
     "stack": [
-      { "icon": "fa-brands fa-html5", "name": "HTML5 / CSS3", "role": "Structure" },
-      { "icon": "fa-brands fa-js", "name": "JavaScript", "role": "Interactivity" },
-      { "icon": "fa-brands fa-css3-alt", "name": "Tailwind CSS", "role": "Styling" },
-      { "icon": "fa-brands fa-php", "name": "PHP", "role": "Backend" },
-      { "icon": "fa-solid fa-database", "name": "MySQL", "role": "Database" }
+      {
+        "icon": "fa-brands fa-html5",
+        "name": "HTML5 / CSS3",
+        "role": "Structure"
+      },
+      {
+        "icon": "fa-brands fa-js",
+        "name": "JavaScript",
+        "role": "Interactivity"
+      },
+      {
+        "icon": "fa-brands fa-css3-alt",
+        "name": "Tailwind CSS",
+        "role": "Styling"
+      },
+      {
+        "icon": "fa-brands fa-php",
+        "name": "PHP",
+        "role": "Backend"
+      },
+      {
+        "icon": "fa-solid fa-database",
+        "name": "MySQL",
+        "role": "Database"
+      }
     ],
     "overview": [
       "Allen's Kitchen is a full-featured online food ordering and restaurant management platform — the flagship project of my portfolio. Built from scratch, it handles everything from customer browsing and ordering to kitchen management and admin reporting.",
@@ -40,53 +66,98 @@
     "challenge": "The trickiest part was syncing order status in real time between the customer view and kitchen display without WebSockets — solved using lightweight polling with PHP endpoints and optimistic UI updates on the frontend.",
     "learned": "This project pushed me deep into database normalisation, session management, and building a full authentication flow from scratch. It also taught me how to structure a multi-role application where the same backend serves completely different UI needs.",
     "gallery": [
-      { "label": "menu.html", "caption": "Customer Menu & Ordering Interface", "wide": true, "img": "assets/screenshots/project-0/Loadingscreen.jpeg" },
-      { "label": "admin/orders.html", "caption": "Admin Dashboard — Orders", "wide": false, "img": "assets/screenshots/project-0/Kitchen.png" },
-      { "label": "kitchen.html", "caption": "Kitchen Display System", "wide": false, "img": "assets/screenshots/project-0/Cart.png" }
+      {
+        "label": "menu.html",
+        "caption": "Customer Menu & Ordering Interface",
+        "wide": true,
+        "img": "assets/screenshots/project-0/Loadingscreen.jpeg"
+      },
+      {
+        "label": "admin/orders.html",
+        "caption": "Admin Dashboard — Orders",
+        "wide": false,
+        "img": "assets/screenshots/project-0/Kitchen.png"
+      },
+      {
+        "label": "kitchen.html",
+        "caption": "Kitchen Display System",
+        "wide": false,
+        "img": "assets/screenshots/project-0/Cart.png"
+      }
     ]
   },
   {
     "id": 1,
     "num": "02",
     "icon": "fa-solid fa-chart-line",
-    "title": "Admin Dashboard",
-    "titleAr": "لوحة الإدارة",
-    "tags": ["TypeScript", "React", "Tailwind", "Charts"],
-    "desc": "A fully-featured admin dashboard built with TypeScript, featuring data tables, analytics views, and a clean management interface.",
-    "descAr": "لوحة إدارة متكاملة بـ TypeScript مع جداول بيانات وتحليلات.",
-    "github": "https://github.com/acetervin/Admin-dashboard",
-    "live": null,
-    "eyebrow": "TypeScript Project",
-    "eyebrowAr": "مشروع TypeScript",
-    "type": "Frontend App",
-    "year": "2024",
+    "title": "Quant Terminal v8",
+    "titleAr": "",
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TradingView",
+      "WebSocket"
+    ],
+    "desc": "Desktop trading terminal with live market panels, TradingView charting, signal boards, and AI-assisted trade analysis.",
+    "descAr": "",
+    "github": null,
+    "live": "https://quant-terminal-v8.vercel.app/",
+    "eyebrow": "Trading UI / Quant Tools",
+    "eyebrowAr": "",
+    "type": "Trading Terminal",
+    "year": "2026",
     "role": "Solo Developer",
     "status": "done",
     "statusLabel": "Complete",
     "stack": [
-      { "icon": "fa-brands fa-js", "name": "TypeScript", "role": "Language" },
-      { "icon": "fa-brands fa-react", "name": "React", "role": "UI Library" },
-      { "icon": "fa-brands fa-css3-alt", "name": "Tailwind CSS", "role": "Styling" },
-      { "icon": "fa-solid fa-chart-line", "name": "Chart.js", "role": "Analytics" }
+      {
+        "icon": "fa-brands fa-html5",
+        "name": "HTML5",
+        "role": "Layout"
+      },
+      {
+        "icon": "fa-brands fa-css3-alt",
+        "name": "CSS3",
+        "role": "Terminal UI"
+      },
+      {
+        "icon": "fa-brands fa-js",
+        "name": "JavaScript",
+        "role": "State + Logic"
+      },
+      {
+        "icon": "fa-solid fa-chart-line",
+        "name": "TradingView",
+        "role": "Charting"
+      },
+      {
+        "icon": "fa-solid fa-wifi",
+        "name": "WebSockets + AI APIs",
+        "role": "Live Feeds"
+      }
     ],
     "overview": [
-      "A fully-featured admin dashboard built with TypeScript — my first major project using static typing in a real application. The dashboard provides a clean management interface with data tables, analytics views, and user management.",
-      "The focus was on writing maintainable, type-safe code and building reusable component patterns that could be dropped into any backend system."
+      "Quant Terminal v8 is a browser-based trading terminal focused on dense market visibility: live pair switching, multi-timeframe signals, embedded TradingView charting, predicted trade setups, and a side panel for AI-assisted analysis.",
+      "The interface is built as a desktop-first control surface rather than a generic dashboard. It prioritizes fast scanning, compact information layout, and immediate context around price action, indicators, and trade ideas."
     ],
     "features": [
-      "Sortable and filterable data tables with pagination",
-      "Analytics charts showing key metrics with visual breakdowns",
-      "User management interface with role assignment",
-      "Responsive sidebar navigation with collapsible sections",
-      "Dark/light mode toggle with persistent preference",
-      "Fully typed props and API response interfaces with TypeScript"
+      "Live market price tracking with WebSocket-fed ticker updates",
+      "Embedded TradingView chart with timeframe switching and indicator context",
+      "Signal boards for monitored assets, top picks, and all-timeframe summaries",
+      "Predicted trade setup table with entry, TP, SL, risk-reward, and ROI fields",
+      "Claude and Gemini analysis panels for AI-assisted trade review",
+      "Resizable desktop layout tuned for wide-screen terminal use"
     ],
-    "challenge": "Learning TypeScript's type system while building a real project simultaneously was a steep curve. Generic types for reusable table components and correctly typing API responses took multiple iterations to get right.",
-    "learned": "TypeScript forced me to think about data shapes before writing logic — a discipline that made the codebase significantly easier to debug. I also got solid practice in component architecture and prop drilling vs context patterns in React.",
+    "challenge": "The hard part was fitting live data, charting, trade setup math, and two AI analyzers into one interface without turning it into noise. The layout had to stay readable while still feeling like a serious terminal instead of a landing page dressed up as one.",
+    "learned": "This build sharpened my sense for information density, desktop-first UI decisions, and how far plain HTML, CSS, and JavaScript can go when the interaction model is designed carefully from the start.",
     "gallery": [
-      { "label": "dashboard/index.tsx", "caption": "Dashboard — Analytics Overview", "wide": true, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect fill='%23e0e0e0' width='1200' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" },
-      { "label": "pages/users.tsx", "caption": "Users Table View", "wide": false, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" },
-      { "label": "pages/settings.tsx", "caption": "Settings Panel", "wide": false, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" }
+      {
+        "label": "quant-terminal-v8.png",
+        "caption": "Desktop terminal with live ETH chart, signal rails, and AI analysis panels",
+        "wide": true,
+        "img": "assets/screenshots/project-1/Quant Terminal v8.png"
+      }
     ]
   },
   {
@@ -95,7 +166,12 @@
     "icon": "fa-solid fa-robot",
     "title": "Smart Automation",
     "titleAr": "الأتمتة الذكية",
-    "tags": ["Python", "AI", "Automation", "Data"],
+    "tags": [
+      "Python",
+      "AI",
+      "Automation",
+      "Data"
+    ],
     "desc": "Exploring AI-powered automations and intelligent systems — from data structures to cloud-native solutions.",
     "descAr": "استكشاف الأتمتة المدعومة بالذكاء الاصطناعي والأنظمة الذكية.",
     "github": "https://github.com/acetervin",
@@ -108,10 +184,26 @@
     "status": "wip",
     "statusLabel": "In Progress",
     "stack": [
-      { "icon": "fa-brands fa-python", "name": "Python", "role": "Core" },
-      { "icon": "fa-solid fa-robot", "name": "AI APIs", "role": "Intelligence" },
-      { "icon": "fa-solid fa-cloud", "name": "AWS", "role": "Cloud" },
-      { "icon": "fa-solid fa-database", "name": "SQLite / CSV", "role": "Storage" }
+      {
+        "icon": "fa-brands fa-python",
+        "name": "Python",
+        "role": "Core"
+      },
+      {
+        "icon": "fa-solid fa-robot",
+        "name": "AI APIs",
+        "role": "Intelligence"
+      },
+      {
+        "icon": "fa-solid fa-cloud",
+        "name": "AWS",
+        "role": "Cloud"
+      },
+      {
+        "icon": "fa-solid fa-database",
+        "name": "SQLite / CSV",
+        "role": "Storage"
+      }
     ],
     "overview": [
       "An ongoing collection of Python automation scripts and AI-assisted tools, exploring how intelligent systems can eliminate repetitive tasks and surface useful insights from raw data.",
@@ -127,9 +219,24 @@
     "challenge": "Currently exploring cloud deployment — taking scripts that run locally and making them run reliably on cloud infrastructure. Also diving into data structures more formally as part of university coursework.",
     "learned": "Python's ecosystem is vast — this project has been my playground for exploring it. Working with real data (messy, incomplete, inconsistent) taught me more about defensive programming than any tutorial ever could.",
     "gallery": [
-      { "label": "scripts/", "caption": "Automation Scripts Collection", "wide": true, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect fill='%23e0e0e0' width='1200' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" },
-      { "label": "data/", "caption": "Data Processing Pipeline", "wide": false, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" },
-      { "label": "cloud/", "caption": "Cloud Functions", "wide": false, "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E" }
+      {
+        "label": "scripts/",
+        "caption": "Automation Scripts Collection",
+        "wide": true,
+        "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect fill='%23e0e0e0' width='1200' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E"
+      },
+      {
+        "label": "data/",
+        "caption": "Data Processing Pipeline",
+        "wide": false,
+        "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E"
+      },
+      {
+        "label": "cloud/",
+        "caption": "Cloud Functions",
+        "wide": false,
+        "img": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect fill='%23e0e0e0' width='600' height='600'/%3E%3Ctext x='50%' y='50%' font-size='24' fill='%23999' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EImage Not Available%3C/text%3E%3C/svg%3E"
+      }
     ]
   },
   {
@@ -138,7 +245,12 @@
     "icon": "fa-solid fa-dove",
     "title": "Family Peace Association",
     "titleAr": "جمعية السلام الأسرية",
-    "tags": ["React", "Tailwind", "JS", "Web Design"],
+    "tags": [
+      "React",
+      "Tailwind",
+      "JS",
+      "Web Design"
+    ],
     "desc": "Clean, responsive NGO website built with React + Tailwind. Covers programmes, events, and impact stories for a Nairobi-based peace-building organisation.",
     "descAr": "موقع منظمة غير حكومية نظيف وسريع الاستجابة مبني بـ React + Tailwind.",
     "github": null,
@@ -151,10 +263,26 @@
     "status": "live",
     "statusLabel": "Live",
     "stack": [
-      { "icon": "fa-brands fa-react", "name": "React", "role": "UI" },
-      { "icon": "fa-brands fa-css3-alt", "name": "Tailwind CSS", "role": "Styling" },
-      { "icon": "fa-brands fa-js", "name": "JavaScript", "role": "Logic" },
-      { "icon": "fa-solid fa-server", "name": "Web Hosting", "role": "Deployment" }
+      {
+        "icon": "fa-brands fa-react",
+        "name": "React",
+        "role": "UI"
+      },
+      {
+        "icon": "fa-brands fa-css3-alt",
+        "name": "Tailwind CSS",
+        "role": "Styling"
+      },
+      {
+        "icon": "fa-brands fa-js",
+        "name": "JavaScript",
+        "role": "Logic"
+      },
+      {
+        "icon": "fa-solid fa-server",
+        "name": "Web Hosting",
+        "role": "Deployment"
+      }
     ],
     "overview": [
       "Developed a clean and responsive website for Family Peace Association Kenya, a Nairobi-based NGO focused on peace-building and family wellbeing programmes.",
@@ -171,9 +299,24 @@
     "challenge": "The main challenge was translating the organisation's brand identity into a digital experience that felt both professional and warm — suitable for community members and international donors alike.",
     "learned": "Working with a real client organisation taught me the importance of content-first design. The layout had to flex around their actual content, not the other way around.",
     "gallery": [
-      { "label": "familypeaceassociationkenya.org", "caption": "Homepage — Live Site", "wide": true, "img": "assets/screenshots/project-3/Family Peace Kenya.png" },
-      { "label": "Programmes Section", "caption": "Programmes & Events", "wide": false, "img": "assets/screenshots/project-3/Family Peace Kenya Events.png" },
-      { "label": "Contact Page", "caption": "Contact & Partnerships", "wide": false, "img": "assets/screenshots/project-3/Family Peace Kenya Blog.png" }
+      {
+        "label": "familypeaceassociationkenya.org",
+        "caption": "Homepage — Live Site",
+        "wide": true,
+        "img": "assets/screenshots/project-3/Family Peace Kenya.png"
+      },
+      {
+        "label": "Programmes Section",
+        "caption": "Programmes & Events",
+        "wide": false,
+        "img": "assets/screenshots/project-3/Family Peace Kenya Events.png"
+      },
+      {
+        "label": "Contact Page",
+        "caption": "Contact & Partnerships",
+        "wide": false,
+        "img": "assets/screenshots/project-3/Family Peace Kenya Blog.png"
+      }
     ]
   },
   {
@@ -182,7 +325,12 @@
     "icon": "fa-solid fa-couch",
     "title": "First Interior Designs",
     "titleAr": "فيرست للتصميم الداخلي",
-    "tags": ["Web Design", "HTML", "CSS", "JS"],
+    "tags": [
+      "Web Design",
+      "HTML",
+      "CSS",
+      "JS"
+    ],
     "desc": "Premium portfolio website for a Nairobi interior design studio. Mobile-first, visually editorial, with portfolio gallery and contact integration.",
     "descAr": "موقع محفظة أعمال احترافي لاستوديو تصميم داخلي في نيروبي.",
     "github": null,
@@ -195,10 +343,26 @@
     "status": "live",
     "statusLabel": "Live",
     "stack": [
-      { "icon": "fa-brands fa-html5", "name": "HTML5 / CSS3", "role": "Structure" },
-      { "icon": "fa-brands fa-js", "name": "JavaScript", "role": "Interactivity" },
-      { "icon": "fa-solid fa-paint-brush", "name": "Custom CSS", "role": "Visual Design" },
-      { "icon": "fa-solid fa-mobile-alt", "name": "Responsive", "role": "Mobile-First" }
+      {
+        "icon": "fa-brands fa-html5",
+        "name": "HTML5 / CSS3",
+        "role": "Structure"
+      },
+      {
+        "icon": "fa-brands fa-js",
+        "name": "JavaScript",
+        "role": "Interactivity"
+      },
+      {
+        "icon": "fa-solid fa-paint-brush",
+        "name": "Custom CSS",
+        "role": "Visual Design"
+      },
+      {
+        "icon": "fa-solid fa-mobile-alt",
+        "name": "Responsive",
+        "role": "Mobile-First"
+      }
     ],
     "overview": [
       "Designed and developed a premium portfolio website for First Interiors, a Nairobi-based interior design studio. The site needed to reflect the studio's high-end aesthetic while showcasing their project portfolio.",
@@ -215,9 +379,24 @@
     "challenge": "Interior design is a highly visual field — the website itself had to look like a premium design product. Balancing aesthetics with performance (large images vs. load speed) was the core tension.",
     "learned": "This project sharpened my eye for visual design details — spacing, typography hierarchy, and image presentation matter enormously when the client's work is the product being sold.",
     "gallery": [
-      { "label": "firstinteriordesigns.co.ke", "caption": "Homepage — Live Site", "wide": true, "img": "assets/screenshots/project-4/First Interiors Designs.png" },
-      { "label": "Portfolio Gallery", "caption": "Project Portfolio", "wide": false, "img": "assets/screenshots/project-4/First Interiors Designs Works.png" },
-      { "label": "Contact Page", "caption": "Contact & Enquiry", "wide": false, "img": "assets/screenshots/project-4/First Interiors Designs Projects Details.png" }
+      {
+        "label": "firstinteriordesigns.co.ke",
+        "caption": "Homepage — Live Site",
+        "wide": true,
+        "img": "assets/screenshots/project-4/First Interiors Designs.png"
+      },
+      {
+        "label": "Portfolio Gallery",
+        "caption": "Project Portfolio",
+        "wide": false,
+        "img": "assets/screenshots/project-4/First Interiors Designs Works.png"
+      },
+      {
+        "label": "Contact Page",
+        "caption": "Contact & Enquiry",
+        "wide": false,
+        "img": "assets/screenshots/project-4/First Interiors Designs Projects Details.png"
+      }
     ]
   },
   {
@@ -226,7 +405,13 @@
     "icon": "fa-solid fa-building",
     "title": "Tetezi Properties",
     "titleAr": "تيتيزي للعقارات",
-    "tags": ["Web Dev", "Maintenance", "CMS", "HTML", "CSS"],
+    "tags": [
+      "Web Dev",
+      "Maintenance",
+      "CMS",
+      "HTML",
+      "CSS"
+    ],
     "desc": "Web development and ongoing maintenance for a Kilimani-based real estate developer. Property listings, UI components, and content management.",
     "descAr": "تطوير وصيانة موقع لمطور عقاري في كيليماني، نيروبي.",
     "github": null,
@@ -239,10 +424,26 @@
     "status": "live",
     "statusLabel": "Live",
     "stack": [
-      { "icon": "fa-brands fa-html5", "name": "HTML5 / CSS3", "role": "Structure" },
-      { "icon": "fa-brands fa-js", "name": "JavaScript", "role": "Interactivity" },
-      { "icon": "fa-solid fa-database", "name": "CMS", "role": "Content Mgmt" },
-      { "icon": "fa-solid fa-wrench", "name": "Web Maintenance", "role": "Ongoing" }
+      {
+        "icon": "fa-brands fa-html5",
+        "name": "HTML5 / CSS3",
+        "role": "Structure"
+      },
+      {
+        "icon": "fa-brands fa-js",
+        "name": "JavaScript",
+        "role": "Interactivity"
+      },
+      {
+        "icon": "fa-solid fa-database",
+        "name": "CMS",
+        "role": "Content Mgmt"
+      },
+      {
+        "icon": "fa-solid fa-wrench",
+        "name": "Web Maintenance",
+        "role": "Ongoing"
+      }
     ],
     "overview": [
       "Ongoing web development and maintenance engagement for Tetezi Properties, a real estate developer based in Kilimani, Nairobi. The project covers property listing pages, UI component updates, and content management.",
@@ -259,9 +460,24 @@
     "challenge": "Real estate sites require frequent content updates — property listings change often. Building a maintainable content structure that the client could update with minimal technical knowledge was the key challenge.",
     "learned": "Maintenance work is a different skill from greenfield development. Reading and improving someone else's codebase (or your own from months earlier) reinforces the value of clean, well-commented code.",
     "gallery": [
-      { "label": "teteziproperties.co.ke", "caption": "Homepage — Live Site", "wide": true, "img": "assets/screenshots/project-5/Tetezi Properties Kenya.png" },
-      { "label": "Property Listings", "caption": "Listings & Filters", "wide": false, "img": "assets/screenshots/project-5/Tetezi Properties Kenya Project.png" },
-      { "label": "Property Detail", "caption": "Property Detail View", "wide": false, "img": "assets/screenshots/project-5/Tetezi Properties Kenya Project Details.png" }
+      {
+        "label": "teteziproperties.co.ke",
+        "caption": "Homepage — Live Site",
+        "wide": true,
+        "img": "assets/screenshots/project-5/Tetezi Properties Kenya.png"
+      },
+      {
+        "label": "Property Listings",
+        "caption": "Listings & Filters",
+        "wide": false,
+        "img": "assets/screenshots/project-5/Tetezi Properties Kenya Project.png"
+      },
+      {
+        "label": "Property Detail",
+        "caption": "Property Detail View",
+        "wide": false,
+        "img": "assets/screenshots/project-5/Tetezi Properties Kenya Project Details.png"
+      }
     ]
   },
   {
@@ -270,7 +486,13 @@
     "icon": "fa-solid fa-cart-shopping",
     "title": "Stationery Central Depot",
     "titleAr": "ستيشنري سنترال ديبوت",
-    "tags": ["Next.js", "React", "Supabase", "M-Pesa", "Cloudinary"],
+    "tags": [
+      "Next.js",
+      "React",
+      "Supabase",
+      "M-Pesa",
+      "Cloudinary"
+    ],
     "desc": "Next.js ecommerce storefront and admin dashboard for a Kenyan stationery brand, with Supabase auth, product management, and secure M-Pesa checkout flows.",
     "descAr": "متجر إلكتروني ولوحة إدارة مبنيان بـ Next.js لعلامة أدوات مكتبية كينية، مع Supabase وإدارة المنتجات ودفع M-Pesa.",
     "github": "https://github.com/acetervin/wordpress-static-export-reactV1",
@@ -283,11 +505,31 @@
     "status": "live",
     "statusLabel": "Live",
     "stack": [
-      { "icon": "fa-brands fa-react", "name": "Next.js / React", "role": "Frontend" },
-      { "icon": "fa-solid fa-database", "name": "Supabase", "role": "Auth + Postgres" },
-      { "icon": "fa-solid fa-cloud", "name": "Cloudinary", "role": "Media Pipeline" },
-      { "icon": "fa-solid fa-mobile-screen-button", "name": "M-Pesa / KCB Buni", "role": "Payments" },
-      { "icon": "fa-solid fa-boxes-stacked", "name": "Zustand + Admin Tools", "role": "State + Ops" }
+      {
+        "icon": "fa-brands fa-react",
+        "name": "Next.js / React",
+        "role": "Frontend"
+      },
+      {
+        "icon": "fa-solid fa-database",
+        "name": "Supabase",
+        "role": "Auth + Postgres"
+      },
+      {
+        "icon": "fa-solid fa-cloud",
+        "name": "Cloudinary",
+        "role": "Media Pipeline"
+      },
+      {
+        "icon": "fa-solid fa-mobile-screen-button",
+        "name": "M-Pesa / KCB Buni",
+        "role": "Payments"
+      },
+      {
+        "icon": "fa-solid fa-boxes-stacked",
+        "name": "Zustand + Admin Tools",
+        "role": "State + Ops"
+      }
     ],
     "overview": [
       "Stationery Central Depot is a full ecommerce build for a Kenyan stationery brand, combining a customer storefront with a protected admin dashboard in one Next.js 16 application.",
@@ -304,9 +546,24 @@
     "challenge": "The hardest part was making checkout reliable across multiple payment paths while keeping the browser untrusted. Orders are created first, payment state is tracked server-side, and the M-Pesa callbacks finalize status through controlled backend transitions.",
     "learned": "This project sharpened my understanding of real commerce architecture: server/client boundaries in Next.js, secure auth with role separation, idempotent payment flows, and designing admin tooling that operators can actually use day to day.",
     "gallery": [
-      { "label": "Homepage", "caption": "Homepage - Storefront Entry Experience", "wide": true, "img": "assets/screenshots/project-6/Stationery Central Homepage.png" },
-      { "label": "Shop Page", "caption": "Shop Collections and Product Browse Flow", "wide": false, "img": "assets/screenshots/project-6/Stationery Central Shop Page.png" },
-      { "label": "Admin Dashboard", "caption": "Operations Dashboard and Revenue Snapshot", "wide": false, "img": "assets/screenshots/project-6/Stationery Central Admin Dashboard.png" }
+      {
+        "label": "Homepage",
+        "caption": "Homepage - Storefront Entry Experience",
+        "wide": true,
+        "img": "assets/screenshots/project-6/Stationery Central Homepage.png"
+      },
+      {
+        "label": "Shop Page",
+        "caption": "Shop Collections and Product Browse Flow",
+        "wide": false,
+        "img": "assets/screenshots/project-6/Stationery Central Shop Page.png"
+      },
+      {
+        "label": "Admin Dashboard",
+        "caption": "Operations Dashboard and Revenue Snapshot",
+        "wide": false,
+        "img": "assets/screenshots/project-6/Stationery Central Admin Dashboard.png"
+      }
     ]
   }
 ]
